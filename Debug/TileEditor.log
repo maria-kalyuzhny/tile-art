@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(17,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(17,24): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(18,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(18,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(19,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(19,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(20,36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(20,30): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(54,54): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(54,43): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+  TileEditor.vcxproj -> C:\Users\Maria\Projects\HelloSFML\Debug\TileEditor.exe

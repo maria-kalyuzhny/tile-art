@@ -1,0 +1,25 @@
+#pragma once
+#include <SFML/Graphics.hpp>
+#include <iostream>
+using namespace std;
+
+class GuiElement : public sf::Drawable, public sf::Transformable
+{
+public:
+	float x, y, w, h;
+	virtual void resize();
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	const static sf::Color button_color;
+	const static sf::Color button_select_color;
+	const static sf::Color menu_color;
+	const static sf::Color bg_color;
+	const static sf::Color view_bg_color;
+	const static sf::Color border_color;
+	const static sf::Color tile_border_color;
+
+	bool visible;
+	GuiElement(float x, float y, float w, float h);
+private:
+};
+
+
