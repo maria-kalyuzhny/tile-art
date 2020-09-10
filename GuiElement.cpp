@@ -29,11 +29,11 @@ GuiElement::GuiElement(float x, float y, float w, float h) {
 void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
-bool GuiElement::containsMouse(int coor_x, int coor_y) {
+bool GuiElement::containsMouse(sf::Vector2f mouse) {
 	//cout << "mouse coors: " << coor_x << ", " << coor_y << endl;
 	//cout << "elem dims:" << this->x << " " << this->y << " " << this->w << " " << this->h << endl;
-	if (coor_x >= this->x && coor_x <= this->x + this->w \
-		&& coor_y >= this->y && coor_y <= this->y + this->h) {
+	if (mouse.x >= this->x && mouse.x <= this->x + this->w \
+		&& mouse.y >= this->y && mouse.y <= this->y + this->h) {
 		return true;
 	}
 	return false;

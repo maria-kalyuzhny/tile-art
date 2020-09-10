@@ -15,19 +15,20 @@ using namespace std;
 class TileEditorGui
 {
 public:
-	float w, h;
+	//float w, h;
+	sf::Vector2f w_size;
 	//vector<GuiElement*> elements;
 	sf::RenderWindow* window;
 	sf::View window_view;
 	ButtonMenu* menu;
 	ViewLayout* layout;
-	TileGrid* picker;
-	TileGrid* map;
+	//TileGrid* picker;
+	//TileGrid* map;
 	//sf::Vector2f picker_scroll;
 	//sf::Vector2f map_scroll;
 	string curr_button;
 
-	TileEditorGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout, TileGrid* picker, TileGrid* map);
+	TileEditorGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout);
 	void handleInput();
 	//void resize();
 	void draw();

@@ -27,7 +27,7 @@ public:
 	virtual void resize(float w, float h) = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	//virtual void scale(float x_ratio, float y_ratio);
-	bool containsMouse(int coor_x, int coor_y);
+	bool containsMouse(sf::Vector2f mouse);
 private:
 };
 

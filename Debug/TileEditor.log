@@ -1,12 +1,44 @@
-﻿  main.cpp
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(17,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(17,24): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(18,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(18,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(19,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(19,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(20,36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(20,30): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(54,54): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\Maria\Projects\HelloSFML\TileEditor\main.cpp(54,43): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+﻿  TileEditorGui.cpp
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(7,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(32,46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(32,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(51,56): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(51,38): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(102,49): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(102,41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(156,35): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\HelloSFML\TileEditor\TileEditorGui.cpp(156,27): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   TileEditor.vcxproj -> C:\Users\Maria\Projects\HelloSFML\Debug\TileEditor.exe

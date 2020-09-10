@@ -11,6 +11,7 @@
 #include "ButtonMenu.h"
 #include "Button.h"
 #include "TileGrid.h"
+#include "TileGridView.h"
 
 using namespace std;
 
@@ -47,26 +48,35 @@ int main() {
 
     sf::Texture texture;
     texture.loadFromImage(texture_img);
-    //sf::Vector2i tex_coors = sf::Vector2i(0, 0);
 
-
-
+    /*Initialize all components of the GUI*/
+    
+    //Window
     sf::RenderWindow window(sf::VideoMode(init_width,init_height), "TileMapEditor");
+    sf::Vector2f w_size = sf::Vector2f(init_width, init_height);
+    
+    //Button menu
     ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
     vector <Button> buttons(num_buttons);
-    ViewLayout view_layout = ViewLayout(0,menu_height,init_width,init_height-menu_height,init_divider_pos,init_width,init_height);
-    TileGrid picker = TileGrid(tile_size,static_cast<int>(size.x/tile_size), static_cast<int>(size.y/tile_size),&texture);
-    //set tile grid in picker to look the same as the original image 
-    picker.setTextureRect(0,0,size.x-tile_size,size.y-tile_size,0,0, size.x, size.y);
-    TileGrid map = TileGrid(tile_size, map_w_tiles, map_h_tiles, &texture);    
-
     for (int i = 0; i < num_buttons; i += 1) {
         button_textures[i] = loadTexture(button_icons[i]);
         buttons[i] = Button(10, 10, 10, 10, button_names[i], &button_textures[i]);
         menu.addButton(&buttons[i], true);
     }
-    //gui.addElement(&menu);
-    TileEditorGui gui = TileEditorGui(&window, &menu, &view_layout, &picker, &map);
+    
+    //Views containing tile picker and user-created tilemap
+    TileGrid picker = TileGrid(tile_size,static_cast<int>(size.x/tile_size), static_cast<int>(size.y/tile_size),&texture);
+    TileGrid map = TileGrid(tile_size, map_w_tiles, map_h_tiles, &texture);   
+    TileGridView picker_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &picker);
+    TileGridView map_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &map);
+    sf::FloatRect view_layout_rect = sf::FloatRect(0, menu_height, init_width, init_height - menu_height);
+    ViewLayout view_layout = ViewLayout(view_layout_rect, w_size, &picker_view, &map_view, init_divider_pos);
+    //Set tile grid in picker to look the same as the original image 
+    picker.setTextureRect(sf::Vector2i(0, 0), sf::Vector2i(size.x - tile_size, size.y - tile_size),
+        sf::FloatRect(0,0,size.x, size.y));
+
+    /*Initialize the GUI and handle input*/
+    TileEditorGui gui = TileEditorGui(&window, &menu, &view_layout);
     gui.handleInput();
     return 0;
 }

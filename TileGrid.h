@@ -15,17 +15,21 @@ public:
 	sf::Texture* texture;
 	sf::VertexArray vertices;
 	sf::RectangleShape bg_rect;
+	sf::RectangleShape selector;
 
 	TileGrid(int t, int map_w, int map_h, sf::Texture* texture);
-	bool containsMouse(int coor_x, int coor_y);
-	void setTextureCoors(int coor_x, int coor_y, int texture_x, int texture_y);
-	void setTextureRect(int coor_x1, int coor_y1, int coor_x2, int coor_y2,
-		int texture_x1, int texture_y1, int texture_x2, int texture_y2);
-	sf::Vector2f getTextureCoors(int coor_x, int coor_y);
+	//bool containsMouse(sf::Vector2i mouse);
+	void setTextureCoors(sf::Vector2i coors, sf::Vector2f t_coors);
+	/*void setTextureRect(sf::Vector2i coor1, sf::Vector2i coor2,
+		sf::Vector2i t_coor1, sf::Vector2i t_coor2);*/
+	void setTextureRect(sf::Vector2i coor1, sf::Vector2i coor2,
+		sf::FloatRect t_rect);
+	sf::Vector2f getTextureCoors(sf::Vector2i coors);
+	sf::FloatRect getTextureRect(sf::Vector2i coor1, sf::Vector2i coor2);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void resize(float w, float h);
 private:
-	int getVertexFromCoors(int coor_x, int coor_y);
+	int getVertexFromCoors(sf::Vector2i coors);
 	void generateVertices();
 	int getVertexFromRowCol(int row, int col);
 	int getRowFromVertex(int v);
