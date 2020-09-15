@@ -12,7 +12,7 @@
 using namespace std;
 
 
-class TileEditorGui
+class TileArtGui
 {
 public:
 	//float w, h;
@@ -26,10 +26,15 @@ public:
 	//TileGrid* map;
 	//sf::Vector2f picker_scroll;
 	//sf::Vector2f map_scroll;
-	string curr_button;
+	bool drawing_mode;
+	bool rectangle_mode;
+	bool erase_mode;
+	bool drawing_now;
+	bool selecting_now;
 
-	TileEditorGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout);
+	TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout);
 	void handleInput();
+	void onButtonClick(string button);
 	//void resize();
 	void draw();
 	//void centerView(sf::View* view, )
@@ -37,4 +42,5 @@ private:
 	const static int num_buttons = 8;
 	float menu_height;
 };
+
 

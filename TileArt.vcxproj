@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d50c74c7-e4d0-4791-8b05-6510add2cf6b}</ProjectGuid>
+    <ProjectGuid>{936ECDB2-EFB7-43A2-9F64-029F76B9B225}</ProjectGuid>
     <RootNamespace>TileEditor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>TileArt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -154,10 +155,10 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonMenu.cpp" />
     <ClCompile Include="GuiElement.cpp" />
+    <ClCompile Include="TileArtGui.cpp" />
     <ClCompile Include="TileGridView.cpp" />
     <ClCompile Include="TileGrid.cpp" />
     <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="TileEditorGui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TilePicker.cpp" />
     <ClCompile Include="ViewLayout.cpp" />
@@ -166,10 +167,10 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonMenu.h" />
     <ClInclude Include="GuiElement.h" />
+    <ClInclude Include="TileArtGui.h" />
     <ClInclude Include="TileGridView.h" />
     <ClInclude Include="TileGrid.h" />
     <ClInclude Include="TileMap.h" />
-    <ClInclude Include="TileEditorGui.h" />
     <ClInclude Include="TilePicker.h" />
     <ClInclude Include="ViewLayout.h" />
   </ItemGroup>

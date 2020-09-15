@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <typeinfo>
-#include "TileEditorGui.h"
+#include "TileArtGui.h"
 #include "GuiElement.h"
 #include "ViewLayout.h"
 #include "ButtonMenu.h"
@@ -72,11 +72,11 @@ int main() {
     sf::FloatRect view_layout_rect = sf::FloatRect(0, menu_height, init_width, init_height - menu_height);
     ViewLayout view_layout = ViewLayout(view_layout_rect, w_size, &picker_view, &map_view, init_divider_pos);
     //Set tile grid in picker to look the same as the original image 
-    picker.setTextureRect(sf::Vector2i(0, 0), sf::Vector2i(size.x - tile_size, size.y - tile_size),
-        sf::FloatRect(0,0,size.x, size.y));
+    picker.setTextureRect(sf::Vector2f(0, 0), sf::Vector2f(size.x - tile_size, size.y - tile_size),
+        sf::Vector2f(0, 0), sf::Vector2f(size.x - tile_size, size.y - tile_size));
 
     /*Initialize the GUI and handle input*/
-    TileEditorGui gui = TileEditorGui(&window, &menu, &view_layout);
+    TileArtGui gui = TileArtGui(&window, &menu, &view_layout);
     gui.handleInput();
     return 0;
 }

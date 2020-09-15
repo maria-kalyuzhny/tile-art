@@ -8,6 +8,10 @@ const sf::Color GuiElement::divider_color = sf::Color(60,60,60);
 const sf::Color GuiElement::grid_bg_color = sf::Color(220,220,220);
 const sf::Color GuiElement::border_color = sf::Color(80,80,80);
 const sf::Color GuiElement::tile_border_color = sf::Color::White;
+const sf::Color GuiElement::selector_outline_color = sf::Color::Red;
+const sf::Color GuiElement::selector_fill_color = sf::Color(255,0,0,80);
+const sf::Color GuiElement::pos_outline_color = sf::Color::Green;
+const sf::Color GuiElement::pos_fill_color = sf::Color::Transparent;
 
 GuiElement::GuiElement() {
 	this->x = 0;

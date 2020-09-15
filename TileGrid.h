@@ -15,24 +15,35 @@ public:
 	sf::Texture* texture;
 	sf::VertexArray vertices;
 	sf::RectangleShape bg_rect;
-	sf::RectangleShape selector;
+	/*sf::RectangleShapes showing tiles based on user's selection and mouse movement,
+	handled from external gui class. */
+	sf::RectangleShape selector_rect; //shows current selection
+	sf::RectangleShape pos_rect; //shows current tile position
 
 	TileGrid(int t, int map_w, int map_h, sf::Texture* texture);
-	//bool containsMouse(sf::Vector2i mouse);
-	void setTextureCoors(sf::Vector2i coors, sf::Vector2f t_coors);
-	/*void setTextureRect(sf::Vector2i coor1, sf::Vector2i coor2,
-		sf::Vector2i t_coor1, sf::Vector2i t_coor2);*/
-	void setTextureRect(sf::Vector2i coor1, sf::Vector2i coor2,
-		sf::FloatRect t_rect);
-	sf::Vector2f getTextureCoors(sf::Vector2i coors);
-	sf::FloatRect getTextureRect(sf::Vector2i coor1, sf::Vector2i coor2);
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	void clear(sf::Vector2f coor);
+	void clearRect(sf::Vector2f coor1, sf::Vector2f coor2);
+	void setTextureCoors(sf::Vector2f coor, sf::Vector2f t_coor);
+	void setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
+		sf::Vector2f t_coor1, sf::Vector2f t_coor2);//sf::FloatRect t_rect);
+	sf::Vector2f getTextureCoors(sf::Vector2f coor);
+	sf::FloatRect getTextureRect(sf::Vector2f coor1, sf::Vector2f coor2);
+	void setSelectorRect(sf::Vector2f coor1, sf::Vector2f coor2);
+	void showSelectorRect();
+	void hideSelectorRect();
+	void setPosRect(sf::Vector2f coor1, sf::Vector2f coor2);
+	void showPosRect();
+	void hidePosRect();
 	void resize(float w, float h);
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 private:
-	int getVertexFromCoors(sf::Vector2i coors);
+	int getVertexFromCoors(sf::Vector2f coors);
 	void generateVertices();
 	int getVertexFromRowCol(int row, int col);
 	int getRowFromVertex(int v);
 	int getColFromVertex(int v);
+	sf::Vector2f getTileCoors(sf::Vector2f coor);
+	sf::FloatRect getTileRect(sf::Vector2f coor1, sf::Vector2f coor2);
 };
 

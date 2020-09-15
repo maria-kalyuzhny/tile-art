@@ -16,6 +16,11 @@ public:
 	const static sf::Color border_color;
 	const static sf::Color tile_border_color;
 	const static sf::Color divider_color;
+	const static sf::Color selector_outline_color;
+	const static sf::Color selector_fill_color;
+	const static sf::Color pos_outline_color;
+	const static sf::Color pos_fill_color;
+	const static int outline_width = -3;
 
 	float x, y, w, h;
 	bool visible;

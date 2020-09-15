@@ -7,22 +7,49 @@ TileGrid::TileGrid(int t, int w_tiles, int h_tiles, sf::Texture* texture) : GuiE
 	this->texture = texture;
 	this->bg_rect = sf::RectangleShape(sf::Vector2f(this->w, this->h));
 	this->bg_rect.setFillColor(grid_bg_color);
-	this->selector = sf::RectangleShape(sf::Vector2f(t,t));
-	selector.setFillColor(sf::Color::Transparent);
-	selector.setPosition(0, 0);
-	//m_rect.setPosition(0, 0);
+	this->selector_rect = sf::RectangleShape(sf::Vector2f(t,t));
+	this->selector_rect = sf::RectangleShape(sf::Vector2f(t, t));
+	this->selector_rect.setOutlineThickness(outline_width);
+	this->pos_rect.setOutlineThickness(outline_width);
+	hideSelectorRect();
+	hidePosRect();
 	generateVertices();
 }
 
-//bool TileGrid::containsMouse(int coor_x, int coor_y) {
-//	if (coor_x >= 0 && coor_y >= 0 && coor_x < t * w_tiles && coor_y < t * h_tiles) {
-//		return true;
-//	}
-//	return false;
-//}
-
-void TileGrid::setTextureCoors(sf::Vector2i coors, sf::Vector2f t_coors) {
+void TileGrid::clear(sf::Vector2f coors) {
 	int v = getVertexFromCoors(coors);
+	for (int i = v; i < v + 4; i++) {
+		vertices[i].color = sf::Color::Transparent;
+	}
+}
+
+void TileGrid::clearRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	//cout << "setting textureRect" << endl;
+	sf::FloatRect c_rect = getTileRect(coor1, coor2);
+	sf::Vector2f upper_left = sf::Vector2f(c_rect.left, c_rect.top);
+	sf::Vector2f lower_right = sf::Vector2f(c_rect.left + c_rect.width - t,
+		c_rect.top + c_rect.height - t);
+	int v1 = getVertexFromCoors(upper_left);
+	int v2 = getVertexFromCoors(lower_right);
+	int row1 = getRowFromVertex(v1); int col1 = getColFromVertex(v1);
+	int row2 = getRowFromVertex(v2); int col2 = getColFromVertex(v2);
+	int v = 0;
+	//cout << "clearing rect " << endl;
+	for (int i = row1; i <= row2; i++) {
+		for (int j = col1; j <= col2; j++) {
+			v = getVertexFromRowCol(i, j);
+			cout << "at vertex " << v << " row " << i << " col " << j << endl;
+			for (int k = v; k < v + 4; k++) {
+				vertices[k].color = sf::Color::Transparent;
+				cout << "clearing vertex " << k << endl;
+			}
+		}
+	}
+}
+
+void TileGrid::setTextureCoors(sf::Vector2f coors, sf::Vector2f t_coors) {
+	int v = getVertexFromCoors(coors);
+	t_coors = getTileCoors(t_coors);
 	if (vertices[v].color == sf::Color::Transparent) {
 		for (int i = v; i < v + 4; i++) {
 			vertices[i].color = sf::Color::White;
@@ -34,59 +61,142 @@ void TileGrid::setTextureCoors(sf::Vector2i coors, sf::Vector2f t_coors) {
 	vertices[v + 3].texCoords = sf::Vector2f(t_coors.x, t_coors.y + t);
 }
 
-void TileGrid::setTextureRect(sf::Vector2i coor1, sf::Vector2i coor2,
-	sf::FloatRect t_rect) {
+void TileGrid::setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
+	sf::Vector2f t_coor1, sf::Vector2f t_coor2){//sf::FloatRect t_rect) {
 	//throws exception if texture coors don't define an rectangle containing a whole number of tiles
-	if (static_cast<int>(t_rect.width) % t != 0 || static_cast<int>(t_rect.height) % t != 0) {
-		cout << "setTextureRect: texture coors don't contain whole number of tiles" << endl;
-		return;
-	}
-	cout << "setting textureRect" << endl;
-	int v1 = getVertexFromCoors(coor1);
-	int v2 = getVertexFromCoors(coor2);
+	sf::FloatRect c_rect = getTileRect(coor1, coor2);
+	sf::FloatRect t_rect = getTileRect(t_coor1, t_coor2);
+	sf::Vector2f upper_left = sf::Vector2f(c_rect.left, c_rect.top);
+	sf::Vector2f lower_right = sf::Vector2f(c_rect.left + c_rect.width - t,
+											c_rect.top + c_rect.height - t);
+	//cout << "setting textureRect" << endl;
+	int v1 = getVertexFromCoors(upper_left);
+	int v2 = getVertexFromCoors(lower_right);
 	int row1 = getRowFromVertex(v1); int col1 = getColFromVertex(v1);
+	cout << "row1, col1 " << row1 << ", " << col1 << endl;
 	int row2 = getRowFromVertex(v2); int col2 = getColFromVertex(v2);
+	cout << "row2, col2 " << row2 << ", " << col2 << endl;
 	int v = 0; //curr upper-left vertex index
 	float tx, ty = 0; //texture coordinates 
 	for (int i = row1; i <= row2; i++) {
 		for (int j = col1; j <= col2; j++) {
 			v = getVertexFromRowCol(i, j);
-			tx = static_cast<int>(t_rect.left + j * t) % static_cast<int>(t_rect.width);
-			ty = static_cast<int>(t_rect.top  + i * t) % static_cast<int>(t_rect.height);
+			//tx = getTileCoors(t_coor1);
+			tx = t_rect.left + t * (j-col1) % static_cast<int>(t_rect.width);
+			ty = t_rect.top  + static_cast<int>((i-row1) * t) % static_cast<int>(t_rect.height);
 			if (vertices[v].color == sf::Color::Transparent) {
 				for (int k = v; k < v + 4; k++) {
 					vertices[k].color = sf::Color::White;
 				}
 			}
 			vertices[v].texCoords = sf::Vector2f(tx, ty);
-			cout << "vertex0 " << v << " tex coords " << tx << ", " << ty << endl;
 			vertices[v + 1].texCoords = sf::Vector2f(tx + t, ty);
-			cout << "vertex1 " << v << " tex coords " << tx + t << ", " << ty << endl;
 			vertices[v + 2].texCoords = sf::Vector2f(tx + t, ty + t);
-			cout << "vertex2 " << v << " tex coords " << tx + t << ", " << ty + t << endl;
 			vertices[v + 3].texCoords = sf::Vector2f(tx, ty + t);
-			cout << "vertex3 " << v << " tex coords " << tx << ", " << ty + t << endl;
 		}
 	}
 }
 
-sf::FloatRect TileGrid::getTextureRect(sf::Vector2i coor1, sf::Vector2i coor2) {
-	sf::Vector2f t1 = getTextureCoors(coor1);
-	sf::Vector2f t2 = getTextureCoors(coor2);
-	sf::Vector2f size = t2-t1;
-	return sf::FloatRect(t1, size);
+sf::Vector2f TileGrid::getTileCoors(sf::Vector2f coor) {
+	return sf::Vector2f((static_cast<int>(coor.x) / t) * t,
+						(static_cast<int>(coor.y) / t) * t);
 }
 
-sf::Vector2f TileGrid::getTextureCoors(sf::Vector2i coors) {
+void TileGrid::setSelectorRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::FloatRect rect = getTileRect(coor1, coor2);
+	selector_rect.setPosition(sf::Vector2f(rect.left, rect.top));
+	selector_rect.setSize(sf::Vector2f(rect.width,rect.height));
+}
+
+void TileGrid::showSelectorRect() {
+	//cout << "showing selector_rect" << endl;
+	selector_rect.setOutlineColor(selector_outline_color);
+	selector_rect.setFillColor(selector_fill_color);
+}
+
+void TileGrid::hideSelectorRect() {
+	//cout << "hiding selector_rect" << endl;
+	selector_rect.setOutlineColor(sf::Color::Transparent);
+	selector_rect.setFillColor(sf::Color::Transparent);
+}
+
+void TileGrid::setPosRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::FloatRect rect = getTileRect(coor1, coor2);
+	pos_rect.setPosition(sf::Vector2f(rect.left, rect.top));
+	pos_rect.setSize(sf::Vector2f(rect.width, rect.height));
+	//pos_rect.setPosition(sf::Vector2f(rect.left, rect.top));
+	//pos_rect.setSize(sf::Vector2f(rect.width, rect.height));
+	//cout << "pos_rect has pos " << rect.left << ", " << rect.top << endl;
+	//cout << "pos_rect has size " << rect.width << ", " << rect.height << endl;
+}
+void TileGrid::showPosRect() {
+	pos_rect.setOutlineColor(pos_outline_color);
+	pos_rect.setFillColor(pos_fill_color);
+}
+
+void TileGrid::hidePosRect() {
+	pos_rect.setOutlineColor(sf::Color::Transparent);
+	pos_rect.setFillColor(sf::Color::Transparent);
+}
+
+sf::FloatRect TileGrid::getTextureRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::Vector2f t1 = getTextureCoors(coor1);
+	sf::Vector2f t2 = getTextureCoors(coor2);
+	//cout << "t1 is " << t1.x << ", " << t1.y << endl;
+	//cout << "tt2 is " << t2.x << ", " << t2.y << endl;
+	sf::Vector2f upper_left = t1; //by default, first coor is upper left
+	sf::Vector2f lower_right = t2;
+	if (t2.x < t1.x) {
+		upper_left.x = t2.x;
+		lower_right.x = t1.x;
+	}
+	if (t2.y < t1.y) {
+		upper_left.y = t2.y;
+		lower_right.y = t1.y;
+	}
+	//cout << "upper left is " << upper_left.x << ", " << upper_left.y << endl;
+	//cout << "lower right is " << lower_right.x << ", " << lower_right.y << endl;
+	sf::Vector2f pos = upper_left;
+	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
+	//cout << "creating rectangle size " << size.x << ", " << size.y << endl;
+	return sf::FloatRect(pos, size);
+}
+
+sf::Vector2f TileGrid::getTextureCoors(sf::Vector2f coors) {
 	int v = getVertexFromCoors(coors);
 	return vertices[v].texCoords;
 }
+
+sf::FloatRect TileGrid::getTileRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::Vector2f t1 = getTileCoors(coor1);
+	sf::Vector2f t2 = getTileCoors(coor2);
+	sf::Vector2f upper_left = t1; //by default, first coor is upper left
+	sf::Vector2f lower_right = t2;
+	if (t2.x < t1.x) {
+		upper_left.x = t2.x;
+		lower_right.x = t1.x;
+	}
+	if (t2.y < t1.y) {
+		upper_left.y = t2.y;
+		lower_right.y = t1.y;
+	}
+	//cout << "upper left is " << upper_left.x << ", " << upper_left.y << endl;
+	//cout << "lower right is " << lower_right.x << ", " << lower_right.y << endl;
+	sf::Vector2f pos = upper_left;
+	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
+	//cout << "creating rectangle size " << size.x << ", " << size.y << endl;
+	return sf::FloatRect(pos, size);
+}
+
+
 
 void TileGrid::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//cout << "drawing vertices" << endl;
 	target.draw(bg_rect);
 	states.texture = texture;
 	target.draw(vertices, states);
+	target.draw(selector_rect);
+	target.draw(pos_rect);
 }
 
 void TileGrid::resize(float w, float h) {
@@ -94,7 +204,7 @@ void TileGrid::resize(float w, float h) {
 	return;
 }
 
-int TileGrid::getVertexFromCoors(sf::Vector2i coors) {
+int TileGrid::getVertexFromCoors(sf::Vector2f coors) {
 	if (coors.x < 0 || coors.y < 0 || coors.x >= t * w_tiles|| coors.y >= t * h_tiles) {
 		cout << "vertex coors out of range. Returning vertex 0" << endl;
 		return 0;
@@ -123,10 +233,6 @@ void TileGrid::generateVertices() {
 }
 
 int TileGrid::getVertexFromRowCol(int row, int col) {
-	//if (row < 0 || row >= w_tiles) {
-	//	cout << Row out of range.Returning vertex 0. << endl;
-
-	//}
 	return 4 * (w_tiles * row + col);
 }
 
@@ -137,9 +243,3 @@ int TileGrid::getRowFromVertex(int v) {
 int TileGrid::getColFromVertex(int v) {
 	return (v / 4) % w_tiles;
 }
-//void TileGrid::setTextureRect(int coor_x1, int coor_y1, int coor_x2, int coor_y2, 
-//						int texture_x1, int texture_y1, int texture_x2, int texture_x3));
-//
-//void TileGrid::fillTextureRect(int coor_x1, int coor_y1, int coor_x2, int coor_y2, 
-//						int texture_x, int texture_y); //REDUNDANT. JUST FOR 'BASE CASE' where texture rect covers 2 tile
-//LIMIT RECT SELECTION SO WE CAN ONLY GO FROM LEFT UP TO BOTTOM RIGHT FOR NOW?
