@@ -26,43 +26,10 @@ void TileArtGui::draw() {
 	window->setView(window_view);
 }
 
-void TileArtGui::onButtonClick(string button) {
-	if (button == "save") {
-		return;
-	}
-	else if (button == "draw") {
-		drawing_mode = true;
-		rectangle_mode = false;
-	}
-	else if (button == "rect") {
-		rectangle_mode = true;
-		drawing_mode = false;
-	}
-	else if (button == "del") {
-		if (erase_mode) {
-			erase_mode = false;
-		}
-		else {
-			erase_mode = true;
-		}
-	}
-}
-
-
-
 void TileArtGui::handleInput() {
 	int t_size = layout->map_view->grid->t;
 	sf::Vector2i mouse_pos_window;
-	sf::Vector2f mouse_pos_view; //, mouse_pos_map, mouse_pos_picker;
-	sf::Vector2f mouse_pos_picker;
-	sf::Vector2f mouse_pos_map;
-	sf::Vector2f t_coor = sf::Vector2f(0, 0), t_coor2 = sf::Vector2f(0, 0);				//first coor of current texture rectangle
-	//sf::Vector2f t_coor2 = sf::Vector2f(t_size, t_size);	//second coor of current texture rectangle
-	//sf::FloatRect t_rect = sf::FloatRect(t_coor, t_coor2);	//texture selection rectangle
-	sf::Vector2f m_coor = sf::Vector2f(0, 0), m_coor2 = sf::Vector2f(0, 0) ;				//first coor of map selection
-	//sf::Vector2f m_coor2 = sf::Vector2f(t_size, t_size);	//second coor of map selection
-	//sf::FloatRect m_rect = sf::FloatRect(m_coor, m_coor2);	//map selection rectangle
-
+	sf::Vector2f mouse_pos_view;
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -93,11 +60,7 @@ void TileArtGui::handleInput() {
 				layout->map_view->grid->hidePosRect();
 				break;
 			}
-			if (!menu->containsMouse(mouse_pos_view)) {
-				for (auto button : menu->buttons) {
-					button->setColor(button->button_color);
-				}
-			}
+
 			window->clear(layout->bg_color);
 			draw();
 			window->display();
@@ -188,6 +151,11 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 			}
 		}
 	}
+	else {
+		for (auto button : menu->buttons) {
+			button->setColor(button->button_color);
+		}
+	}
 	/* move divider */
 	if (layout->moving_divider) {
 		if (cursor.loadFromSystem(sf::Cursor::SizeHorizontal)) {
@@ -214,8 +182,14 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 				layout->map_view->grid->hidePosRect();
 				if (layout->picker_view->grid->containsMouse(mouse_pos_picker)) {
 					if (selecting_now) {
-						t_coor2 = mouse_pos_picker;
-						layout->picker_view->grid->setSelectorRect(t_coor, t_coor2);
+						if (rectangle_mode) {
+							t_coor2 = mouse_pos_picker;
+							layout->picker_view->grid->setSelectorRect(t_coor, t_coor2);
+						}
+						else {
+							t_coor = mouse_pos_picker;
+							layout->picker_view->grid->setSelectorRect(t_coor, t_coor);
+						}
 						layout->picker_view->grid->showSelectorRect();
 					}
 					else {
@@ -275,9 +249,16 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 		mouse_pos_picker = (*window).mapPixelToCoords(mouse_pos_window);
 		if (layout->picker_view->grid->containsMouse(mouse_pos_picker)) {
 			if (selecting_now) {
-				t_coor2 = mouse_pos_picker;
-				layout->picker_view->grid->setSelectorRect(t_coor, t_coor2);
+				if (rectangle_mode) {
+					t_coor2 = mouse_pos_picker;
+					layout->picker_view->grid->setSelectorRect(t_coor, t_coor2);
+				}
+				else {
+					t_coor = mouse_pos_picker;
+					layout->picker_view->grid->setSelectorRect(t_coor, t_coor);
+				}
 				layout->picker_view->grid->showSelectorRect();
+
 			}
 			layout->picker_view->grid->setPosRect(mouse_pos_picker, mouse_pos_picker);
 			layout->picker_view->grid->showPosRect();
@@ -322,4 +303,26 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 		selecting_now = false;
 	}
 	window->setView(window_view);
+}
+
+void TileArtGui::onButtonClick(string button) {
+	if (button == "save") {
+		return;
+	}
+	else if (button == "draw") {
+		drawing_mode = true;
+		rectangle_mode = false;
+	}
+	else if (button == "rect") {
+		rectangle_mode = true;
+		drawing_mode = false;
+	}
+	else if (button == "del") {
+		if (erase_mode) {
+			erase_mode = false;
+		}
+		else {
+			erase_mode = true;
+		}
+	}
 }
