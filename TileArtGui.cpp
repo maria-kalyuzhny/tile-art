@@ -59,6 +59,9 @@ void TileArtGui::handleInput() {
 				layout->picker_view->grid->hidePosRect();
 				layout->map_view->grid->hidePosRect();
 				break;
+			case sf::Event::MouseWheelMoved:
+				onMouseWheelMoved(mouse_pos_view, event.mouseWheel.delta);
+				break;
 			}
 
 			window->clear(layout->bg_color);
@@ -69,11 +72,30 @@ void TileArtGui::handleInput() {
 	}
 }
 
-void TileArtGui::onResize(sf::Vector2f w_size) {
-	window_view.reset(sf::FloatRect(0, 0, w_size.x, w_size.y));
-	menu->resize(w_size.x, menu->h);
-	layout->updateWindow(w_size);
-	layout->resize(w_size.x, w_size.y - menu->h);
+void TileArtGui::onButtonClick(string button) {
+	if (button == "save") {
+		return;
+	}
+	else if (button == "draw") {
+		drawing_mode = true;
+		rectangle_mode = false;
+	}
+	else if (button == "rect") {
+		rectangle_mode = true;
+		drawing_mode = false;
+	}
+	else if (button == "clear") {
+		layout->picker_view->zoom(1.1);
+		layout->map_view->zoom(0.9);
+	}
+	else if (button == "del") {
+		if (erase_mode) {
+			erase_mode = false;
+		}
+		else {
+			erase_mode = true;
+		}
+	}
 }
 
 void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view) {
@@ -167,6 +189,7 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 		/* cursor set to double arrow if over divider */
 		if (layout->divider.getGlobalBounds().contains(mouse_pos_view.x, mouse_pos_view.y)) {
 			layout->picker_view->grid->hidePosRect();
+			layout->map_view->grid->hidePosRect();
 			if (cursor.loadFromSystem(sf::Cursor::SizeHorizontal)) {
 				window->setMouseCursor(cursor);
 			}
@@ -303,26 +326,21 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 		selecting_now = false;
 	}
 	window->setView(window_view);
+	//layout->picker_view->zoom(1.1);
 }
 
-void TileArtGui::onButtonClick(string button) {
-	if (button == "save") {
-		return;
+void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {
+	if (layout->picker_view->containsMouse(mouse_pos_view)) {
+		layout->picker_view->zoom(delta);
 	}
-	else if (button == "draw") {
-		drawing_mode = true;
-		rectangle_mode = false;
+	else if (layout->map_view->containsMouse(mouse_pos_view)) {
+		layout->map_view->zoom(delta);
 	}
-	else if (button == "rect") {
-		rectangle_mode = true;
-		drawing_mode = false;
-	}
-	else if (button == "del") {
-		if (erase_mode) {
-			erase_mode = false;
-		}
-		else {
-			erase_mode = true;
-		}
-	}
+}
+
+void TileArtGui::onResize(sf::Vector2f w_size) {
+	window_view.reset(sf::FloatRect(0, 0, w_size.x, w_size.y));
+	menu->resize(w_size.x, menu->h);
+	layout->updateWindow(w_size);
+	layout->resize(w_size.x, w_size.y - menu->h);
 }

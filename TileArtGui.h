@@ -35,11 +35,13 @@ public:
 private:
 	const static int num_buttons = 8;
 	float menu_height;
-	void onResize(sf::Vector2f w_size);
+	void onButtonClick(string button);
+
 	void onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
-	void onButtonClick(string button);
+	void onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta);
+	void onResize(sf::Vector2f w_size);
 };
 
 

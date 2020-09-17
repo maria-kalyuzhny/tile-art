@@ -13,13 +13,19 @@ public:
 	TileGrid* grid;
 	sf::View view;
 	sf::Vector2f w_size;
+	sf::Vector2f s;
+	float z;
+
 	TileGridView(const sf::FloatRect& rect, sf::Vector2f w_size, TileGrid* grid);
+	void zoom(int delta);
 	void resize(float w, float h);
 	void reset(const sf::FloatRect& rect);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	void centerOnElement();
+	void centerOnGrid();
+	void scroll(char direction, int delta = 10);
 	void updateWindow(sf::Vector2f w_size);
 private:
-
+	const float min_zoom = 0.1;
+	const float max_zoom = 4.0;
 };
 
