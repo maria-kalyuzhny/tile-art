@@ -36,6 +36,7 @@ public:
 	void hidePosRect();
 	void resize(float w, float h);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	sf::Image getImage();
 
 private:
 	int getVertexFromCoors(sf::Vector2f coors);

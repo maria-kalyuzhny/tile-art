@@ -36,11 +36,14 @@ private:
 	const static int num_buttons = 8;
 	float menu_height;
 	void onButtonClick(string button);
+	bool shift_down;
 
 	void onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta);
+	void onKeyPressed(sf::Keyboard::Key key);
+	//void onKeyReleased(sf::Keyboard::Key key);
 	void onResize(sf::Vector2f w_size);
 };
 

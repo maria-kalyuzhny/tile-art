@@ -1,76 +1,26 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TileEditor.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   TileArtGui.cpp
 C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(28,28): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(33,28): warning C4305: 'initializing': truncation from 'double' to 'const float'
 C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(8,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(43,55): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(44,55): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(43,37): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(44,37): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(88,29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(89,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  TileGridView.cpp
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(28,28): warning C4305: 'initializing': truncation from 'double' to 'const float'
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(38,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(48,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ViewLayout.cpp
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(28,28): warning C4305: 'initializing': truncation from 'double' to 'const float'
-  main.cpp
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(28,28): warning C4305: 'initializing': truncation from 'double' to 'const float'
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(18,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(18,24): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(19,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(19,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(20,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(20,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(21,36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(21,30): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(55,54): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(55,43): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(75,87): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(97,31): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
-          [
-              T=unsigned int
-          ]
-          and
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(75,67): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(97,21): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
-          [
-              T=unsigned int
-          ]
-          and
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(76,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(76,49): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-  Generating Code...
   TileArt.vcxproj -> C:\Users\Maria\Projects\TileArt\Debug\TileArt.exe

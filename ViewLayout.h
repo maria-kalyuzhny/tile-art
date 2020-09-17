@@ -16,10 +16,10 @@ public:
 	//float window_w;
 	//float window_h;
 	sf::Vector2f w_size;
-	int map_w;
-	int map_h;
-	int picker_w;
-	int picker_h;
+	//int map_w;
+	//int map_h;
+	//int picker_w;
+	//int picker_h;
 	/*sf::Vector2f map_scroll;
 	sf::Vector2f picker_scroll;*/
 

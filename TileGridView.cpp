@@ -6,7 +6,10 @@ TileGridView::TileGridView(const sf::FloatRect& rect, sf::Vector2f w_size, TileG
 	this->w_size = w_size;
 	this->grid = grid;
 	this->z = 1.0;
+	this->max_scroll_x = this->grid->w;
+	this->max_scroll_y = this->grid->h;
 	this->s = sf::Vector2f(0, 0);
+	this->s_delta = 0.01 * w_size.y;
 	this->view = sf::View(sf::FloatRect(0,0,w,h));
 	this->view.setViewport(sf::FloatRect(x / w_size.x, y / w_size.y, w / w_size.x, h / w_size.y));
 	this->centerOnGrid();
@@ -16,17 +19,15 @@ void TileGridView::reset(const sf::FloatRect& rect) {
 	this->x = rect.left; this->y = rect.top;
 	this->w = rect.width; this->h = rect.height;
 	resize(w, h);
-	//view.zoom(z);
+	centerOnGrid();
 	view.setSize(w * z, h * z);
 	view.move(s);
-	//cout << "view rect set to " << view.getSize().x << ", " << view.getSize().y << endl;
-	//cout << "viewport set to " << view.getViewport().width*w_size.x << ", " << view.getViewport().height* w_size.y << endl;
 }
 
 void TileGridView::resize(float w, float h) {
 	view.reset(sf::FloatRect(0, 0, w, h));
 	view.setViewport(sf::FloatRect(x / w_size.x, y / w_size.y, w / w_size.x, h / w_size.y));
-	centerOnGrid();
+	//centerOnGrid();
 }
 
 void TileGridView::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -39,22 +40,37 @@ void TileGridView::zoom(int delta) {
 	if (temp_z <= max_zoom && temp_z >= min_zoom) {
 		this->z = temp_z;
 		view.setSize(w * z, h * z);
+		s_delta = 0.01*w_size.y*z;
 	}
 }
 
-void TileGridView::scroll(char direction, int delta) {
-	switch (direction){
-		case 'W':
-			view.move(0, delta);
-			s.y = s.y + delta;
-			break;
-		case 'A':
-			break;
-		case 'S':
-			break;
-		case 'D':
-			break;
+void TileGridView::scroll(sf::Keyboard::Key key) {
+	if (key == sf::Keyboard::Key::A) {
+		if (s.x + s_delta < max_scroll_x) {
+			view.move(s_delta, 0);
+			s.x = s.x + s_delta;
+		}
+
 	}
+	else if (key == sf::Keyboard::Key::D) {
+		if (s.x - s_delta > -max_scroll_x) {
+			view.move(-s_delta, 0);
+			s.x = s.x - s_delta;
+		}
+	}
+	else if (key == sf::Keyboard::Key::W) {
+		if (s.y + s_delta < max_scroll_y) {
+			view.move(0, s_delta);
+			s.y = s.y + s_delta;
+		}
+	}
+	else if (key == sf::Keyboard::Key::S) {
+		if (s.y - s_delta > -max_scroll_y) {
+			view.move(0, -s_delta);
+			s.y = s.y - s_delta;
+		}
+	}
+	cout << key << " scroll is now " << s.x << ", " << s.y << endl;
 }
 
 void TileGridView::centerOnGrid() {

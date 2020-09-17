@@ -17,6 +17,7 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 	erase_mode = false;
 	drawing_now = false;
 	selecting_now = false;
+	shift_down = false;
 }
 
 void TileArtGui::draw() {
@@ -62,8 +63,13 @@ void TileArtGui::handleInput() {
 			case sf::Event::MouseWheelMoved:
 				onMouseWheelMoved(mouse_pos_view, event.mouseWheel.delta);
 				break;
+			case sf::Event::KeyPressed:
+				onKeyPressed(event.key.code);
+				break;
+	/*		case sf::Event::KeyReleased:
+				onKeyReleased(event.key.code);
+				break;*/
 			}
-
 			window->clear(layout->bg_color);
 			draw();
 			window->display();
@@ -73,10 +79,7 @@ void TileArtGui::handleInput() {
 }
 
 void TileArtGui::onButtonClick(string button) {
-	if (button == "save") {
-		return;
-	}
-	else if (button == "draw") {
+	if (button == "draw") {
 		drawing_mode = true;
 		rectangle_mode = false;
 	}
@@ -84,9 +87,20 @@ void TileArtGui::onButtonClick(string button) {
 		rectangle_mode = true;
 		drawing_mode = false;
 	}
-	else if (button == "clear") {
+	/*else if (button == "clear") {
 		layout->picker_view->zoom(1.1);
 		layout->map_view->zoom(0.9);
+	}*/
+	else if (button == "save") {
+		cout << "save clicked" << endl;
+		sf::Texture temp = sf::Texture();
+		temp.create(w_size.x, w_size.y);
+		temp.update(*window);
+		sf::Image img = temp.copyToImage();
+		//cout << img.getPixelsPtr() << endl;
+		//cout << *(img.getPixelsPtr()) << endl;
+		cout << img.getSize().x << img.getSize().y << endl;
+		img.saveToFile("test1.png");
 	}
 	else if (button == "del") {
 		if (erase_mode) {
@@ -122,9 +136,9 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 		else if (layout->picker_view->containsMouse(mouse_pos_view)) {
 			window->setView(layout->picker_view->view);
 			mouse_pos_picker = (*window).mapPixelToCoords(mouse_pos_window);
-			layout->picker_view->grid->setSelectorRect(mouse_pos_picker, mouse_pos_picker);
 			//cout << mouse_pos_picker.x << ", " << mouse_pos_picker.y << endl;
 			if (layout->picker_view->grid->containsMouse(mouse_pos_picker)) {
+				layout->picker_view->grid->setSelectorRect(mouse_pos_picker, mouse_pos_picker);
 				selecting_now = true;
 				t_coor = mouse_pos_picker;
 				layout->picker_view->grid->showSelectorRect();
@@ -337,6 +351,23 @@ void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {
 		layout->map_view->zoom(delta);
 	}
 }
+
+void TileArtGui::onKeyPressed(sf::Keyboard::Key key) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+		layout->picker_view->scroll(key);
+	}
+	else {
+		layout->map_view->scroll(key); 
+	}
+}
+
+//
+//void TileArtGui::onKeyReleased(sf::Keyboard::Key key) {
+//	//if (key == sf::Keyboard::Key::LShift) {
+//	//	shift_down == false;
+//	//}
+//}
+
 
 void TileArtGui::onResize(sf::Vector2f w_size) {
 	window_view.reset(sf::FloatRect(0, 0, w_size.x, w_size.y));
