@@ -93,13 +93,14 @@ void TileArtGui::onButtonClick(string button) {
 	}*/
 	else if (button == "save") {
 		cout << "save clicked" << endl;
-		sf::Texture temp = sf::Texture();
+		/*sf::Texture temp = sf::Texture();
 		temp.create(w_size.x, w_size.y);
 		temp.update(*window);
-		sf::Image img = temp.copyToImage();
+		sf::Image img = temp.copyToImage();*/
 		//cout << img.getPixelsPtr() << endl;
 		//cout << *(img.getPixelsPtr()) << endl;
-		cout << img.getSize().x << img.getSize().y << endl;
+		//cout << img.getSize().x << img.getSize().y << endl;
+		sf::Image img = layout->map_view->grid->getImage();
 		img.saveToFile("test1.png");
 	}
 	else if (button == "del") {

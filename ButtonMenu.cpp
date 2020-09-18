@@ -24,22 +24,16 @@ void ButtonMenu::addButton(Button* button, bool fit_to_menu) {
 		float y = this->y + padding;
 		button->setPosition(x, y);
 		button->resize(button_size, button_size);
-		cout << button->x << endl;
 	}
 	this->buttons.push_back(button);
 	num_buttons += 1;
-	cout << "added button w x,y,size " << x << " " << y << " " << button_size << " name " << button->name << " texture " << button->texture << endl;
-	cout << num_buttons << endl;
 }
 
 void ButtonMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(this->rect);
 	for (Button* button : this->buttons) {
 		if (button->visible) {
-			//cout << "drawing button" << endl;
-			//cout << button->x << " " << button->y << " " << button->w << " " << button->h << " " << button->name << " " << button->texture << endl;
 			target.draw(*button);
-			//cout << "finished drawing button" << endl;
 		}
 
 	}
@@ -65,6 +59,5 @@ Button* ButtonMenu::getButton(string name) {
 			return button;
 		}
 	}
-	cout << "button with name " << name << " not found." << endl;
 	return nullptr;
 }

@@ -69,13 +69,10 @@ void TileGrid::setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
 	sf::Vector2f upper_left = sf::Vector2f(c_rect.left, c_rect.top);
 	sf::Vector2f lower_right = sf::Vector2f(c_rect.left + c_rect.width - t,
 											c_rect.top + c_rect.height - t);
-	//cout << "setting textureRect" << endl;
 	int v1 = getVertexFromCoors(upper_left);
 	int v2 = getVertexFromCoors(lower_right);
 	int row1 = getRowFromVertex(v1); int col1 = getColFromVertex(v1);
-	cout << "row1, col1 " << row1 << ", " << col1 << endl;
 	int row2 = getRowFromVertex(v2); int col2 = getColFromVertex(v2);
-	cout << "row2, col2 " << row2 << ", " << col2 << endl;
 	int v = 0; //curr upper-left vertex index
 	float tx, ty = 0; //texture coordinates 
 	for (int i = row1; i <= row2; i++) {
@@ -97,25 +94,41 @@ void TileGrid::setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
 	}
 }
 
-sf::Vector2f TileGrid::getTileCoors(sf::Vector2f coor) {
-	return sf::Vector2f((static_cast<int>(coor.x) / t) * t,
-						(static_cast<int>(coor.y) / t) * t);
+sf::Vector2f TileGrid::getTextureCoors(sf::Vector2f coors) {
+	int v = getVertexFromCoors(coors);
+	return vertices[v].texCoords;
+}
+
+sf::FloatRect TileGrid::getTextureRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::Vector2f t1 = getTextureCoors(coor1);
+	sf::Vector2f t2 = getTextureCoors(coor2);
+	sf::Vector2f upper_left = t1; //by default, first coor is upper left
+	sf::Vector2f lower_right = t2;
+	if (t2.x < t1.x) {
+		upper_left.x = t2.x;
+		lower_right.x = t1.x;
+	}
+	if (t2.y < t1.y) {
+		upper_left.y = t2.y;
+		lower_right.y = t1.y;
+	}
+	sf::Vector2f pos = upper_left;
+	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
+	return sf::FloatRect(pos, size);
 }
 
 void TileGrid::setSelectorRect(sf::Vector2f coor1, sf::Vector2f coor2) {
 	sf::FloatRect rect = getTileRect(coor1, coor2);
 	selector_rect.setPosition(sf::Vector2f(rect.left, rect.top));
-	selector_rect.setSize(sf::Vector2f(rect.width,rect.height));
+	selector_rect.setSize(sf::Vector2f(rect.width, rect.height));
 }
 
 void TileGrid::showSelectorRect() {
-	//cout << "showing selector_rect" << endl;
 	selector_rect.setOutlineColor(selector_outline_color);
 	selector_rect.setFillColor(selector_fill_color);
 }
 
 void TileGrid::hideSelectorRect() {
-	//cout << "hiding selector_rect" << endl;
 	selector_rect.setOutlineColor(sf::Color::Transparent);
 	selector_rect.setFillColor(sf::Color::Transparent);
 }
@@ -124,11 +137,8 @@ void TileGrid::setPosRect(sf::Vector2f coor1, sf::Vector2f coor2) {
 	sf::FloatRect rect = getTileRect(coor1, coor2);
 	pos_rect.setPosition(sf::Vector2f(rect.left, rect.top));
 	pos_rect.setSize(sf::Vector2f(rect.width, rect.height));
-	//pos_rect.setPosition(sf::Vector2f(rect.left, rect.top));
-	//pos_rect.setSize(sf::Vector2f(rect.width, rect.height));
-	//cout << "pos_rect has pos " << rect.left << ", " << rect.top << endl;
-	//cout << "pos_rect has size " << rect.width << ", " << rect.height << endl;
 }
+
 void TileGrid::showPosRect() {
 	pos_rect.setOutlineColor(pos_outline_color);
 	pos_rect.setFillColor(pos_fill_color);
@@ -139,59 +149,12 @@ void TileGrid::hidePosRect() {
 	pos_rect.setFillColor(sf::Color::Transparent);
 }
 
-sf::FloatRect TileGrid::getTextureRect(sf::Vector2f coor1, sf::Vector2f coor2) {
-	sf::Vector2f t1 = getTextureCoors(coor1);
-	sf::Vector2f t2 = getTextureCoors(coor2);
-	//cout << "t1 is " << t1.x << ", " << t1.y << endl;
-	//cout << "tt2 is " << t2.x << ", " << t2.y << endl;
-	sf::Vector2f upper_left = t1; //by default, first coor is upper left
-	sf::Vector2f lower_right = t2;
-	if (t2.x < t1.x) {
-		upper_left.x = t2.x;
-		lower_right.x = t1.x;
-	}
-	if (t2.y < t1.y) {
-		upper_left.y = t2.y;
-		lower_right.y = t1.y;
-	}
-	//cout << "upper left is " << upper_left.x << ", " << upper_left.y << endl;
-	//cout << "lower right is " << lower_right.x << ", " << lower_right.y << endl;
-	sf::Vector2f pos = upper_left;
-	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
-	//cout << "creating rectangle size " << size.x << ", " << size.y << endl;
-	return sf::FloatRect(pos, size);
+void TileGrid::resize(float w, float h) {
+	//do nothing lol
+	return;
 }
-
-sf::Vector2f TileGrid::getTextureCoors(sf::Vector2f coors) {
-	int v = getVertexFromCoors(coors);
-	return vertices[v].texCoords;
-}
-
-sf::FloatRect TileGrid::getTileRect(sf::Vector2f coor1, sf::Vector2f coor2) {
-	sf::Vector2f t1 = getTileCoors(coor1);
-	sf::Vector2f t2 = getTileCoors(coor2);
-	sf::Vector2f upper_left = t1; //by default, first coor is upper left
-	sf::Vector2f lower_right = t2;
-	if (t2.x < t1.x) {
-		upper_left.x = t2.x;
-		lower_right.x = t1.x;
-	}
-	if (t2.y < t1.y) {
-		upper_left.y = t2.y;
-		lower_right.y = t1.y;
-	}
-	//cout << "upper left is " << upper_left.x << ", " << upper_left.y << endl;
-	//cout << "lower right is " << lower_right.x << ", " << lower_right.y << endl;
-	sf::Vector2f pos = upper_left;
-	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
-	//cout << "creating rectangle size " << size.x << ", " << size.y << endl;
-	return sf::FloatRect(pos, size);
-}
-
-
 
 void TileGrid::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//cout << "drawing vertices" << endl;
 	target.draw(bg_rect);
 	states.texture = texture;
 	target.draw(vertices, states);
@@ -199,16 +162,22 @@ void TileGrid::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(pos_rect);
 }
 
-void TileGrid::resize(float w, float h) {
-	//do nothing lol
-	return;
+sf::Image TileGrid::getImage() {
+	sf::RenderTexture r_texture;
+	r_texture.create(w, h);
+	r_texture.display();
+	r_texture.draw(vertices, texture);
+	sf::Image img = r_texture.getTexture().copyToImage();
+	return img;
 }
 
+/* private methods */
+
 int TileGrid::getVertexFromCoors(sf::Vector2f coors) {
-	if (coors.x < 0 || coors.y < 0 || coors.x >= t * w_tiles|| coors.y >= t * h_tiles) {
-		cout << "vertex coors out of range. Returning vertex 0" << endl;
-		return 0;
-	}
+	//if (coors.x < 0 || coors.y < 0 || coors.x >= t * w_tiles|| coors.y >= t * h_tiles) {
+	//	cout << "vertex coors out of range. Returning vertex 0" << endl;
+	//	return 0;
+	//}
 	int x = coors.x / t;
 	int y = coors.y / t;
 	return 4*(y * w_tiles + x);
@@ -242,4 +211,27 @@ int TileGrid::getRowFromVertex(int v) {
 
 int TileGrid::getColFromVertex(int v) {
 	return (v / 4) % w_tiles;
+}
+
+sf::Vector2f TileGrid::getTileCoors(sf::Vector2f coor) {
+	return sf::Vector2f((static_cast<int>(coor.x) / t) * t,
+		(static_cast<int>(coor.y) / t) * t);
+}
+
+sf::FloatRect TileGrid::getTileRect(sf::Vector2f coor1, sf::Vector2f coor2) {
+	sf::Vector2f t1 = getTileCoors(coor1);
+	sf::Vector2f t2 = getTileCoors(coor2);
+	sf::Vector2f upper_left = t1; //by default, first coor is upper left
+	sf::Vector2f lower_right = t2;
+	if (t2.x < t1.x) {
+		upper_left.x = t2.x;
+		lower_right.x = t1.x;
+	}
+	if (t2.y < t1.y) {
+		upper_left.y = t2.y;
+		lower_right.y = t1.y;
+	}
+	sf::Vector2f pos = upper_left;
+	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
+	return sf::FloatRect(pos, size);
 }

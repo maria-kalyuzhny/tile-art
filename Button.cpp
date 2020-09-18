@@ -44,7 +44,6 @@ void Button::resize(float w, float h) {
 	this->h = h;
 	this->button_rect.setSize(sf::Vector2f(w, h));
 	this->icon_rect.setSize(sf::Vector2f(w * icon_ratio, h * icon_ratio));
-	cout << "button resize called" << endl;
 }
 
 void Button::setPosition(float x, float y) {
@@ -57,12 +56,3 @@ void Button::setPosition(float x, float y) {
 void Button::setColor(sf::Color color) {
 	this->button_rect.setFillColor(color);
 }
-//void Button::setTextureRect(int x, int y, int w, int h) {
-//	cout << "setting text rect size ";
-//	this->texture_rect.left = x; // = sf::IntRect(x, y, w, h);
-//	this->texture_rect.top = y;
-//	this->texture_rect.width = w;
-//	this->texture_rect.height = h;
-//	cout << this->texture_rect.width << endl;
-//	this->icon_rect.setTextureRect(this->texture_rect);
-//}
