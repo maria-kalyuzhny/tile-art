@@ -12,8 +12,6 @@ ViewLayout::ViewLayout(sf::FloatRect rect, sf::Vector2f w_size, TileGridView* pi
 	this->divider.setPosition(this->div_x, this->y);
 	this->divider.setFillColor(this->divider_color);
 	this->moving_divider = false;
-	cout << "view layout" << this->x << ", " << this->y << " " << this->w << ", " << this->h << endl;
-	cout << "window size is" << w_size.x << ", " << w_size.y << endl;
 }
 
 void ViewLayout::updateWindow(sf::Vector2f w_size) {

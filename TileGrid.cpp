@@ -24,7 +24,6 @@ void TileGrid::clear(sf::Vector2f coors) {
 }
 
 void TileGrid::clearRect(sf::Vector2f coor1, sf::Vector2f coor2) {
-	//cout << "setting textureRect" << endl;
 	sf::FloatRect c_rect = getTileRect(coor1, coor2);
 	sf::Vector2f upper_left = sf::Vector2f(c_rect.left, c_rect.top);
 	sf::Vector2f lower_right = sf::Vector2f(c_rect.left + c_rect.width - t,
@@ -34,14 +33,11 @@ void TileGrid::clearRect(sf::Vector2f coor1, sf::Vector2f coor2) {
 	int row1 = getRowFromVertex(v1); int col1 = getColFromVertex(v1);
 	int row2 = getRowFromVertex(v2); int col2 = getColFromVertex(v2);
 	int v = 0;
-	//cout << "clearing rect " << endl;
 	for (int i = row1; i <= row2; i++) {
 		for (int j = col1; j <= col2; j++) {
 			v = getVertexFromRowCol(i, j);
-			cout << "at vertex " << v << " row " << i << " col " << j << endl;
 			for (int k = v; k < v + 4; k++) {
 				vertices[k].color = sf::Color::Transparent;
-				cout << "clearing vertex " << k << endl;
 			}
 		}
 	}

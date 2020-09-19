@@ -29,7 +29,8 @@ public:
 	sf::Vector2f mouse_pos_map;
 	sf::Vector2f t_coor, t_coor2;
 	sf::Vector2f m_coor, m_coor2;
-	TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout);
+	string output_file;
+	TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout, string output_file);
 	void handleInput();
 	void draw();
 private:

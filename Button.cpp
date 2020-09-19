@@ -8,7 +8,6 @@ Button::Button() {
 }
 
 Button::Button(float x, float y, float w, float h, string name, sf::Texture* texture) : GuiElement(x, y, w, h) {
-	//cout << "Running Button constructor" << endl;
 	if (!name.empty()) {
 		this->name = name;
 	}
@@ -34,7 +33,6 @@ Button::Button(float x, float y, float w, float h, string name, sf::Texture* tex
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//states.texture = this->texture;
-	//cout << "Button: drawing button " << endl; // this->name << endl;
 	target.draw(this->button_rect);
 	target.draw(this->icon_rect);
 }

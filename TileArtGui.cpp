@@ -2,7 +2,7 @@
 #include <iostream>
 #include "TileArtGui.h"
 
-TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout) {
+TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout, string output_file) {
 	this->window = window;
 	this->w_size = sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y));
 	this->menu_height = 0.08 * w_size.y;
@@ -10,6 +10,7 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 	this->layout = layout;
 	this->window_view = sf::View(sf::FloatRect(0, 0, w_size.x, w_size.y));
 	this->window->setView(this->window_view);
+	this->output_file = output_file;
 	t_coor = sf::Vector2f(0, 0); t_coor2 = sf::Vector2f(0, 0);
 	m_coor = sf::Vector2f(0, 0); m_coor2 = sf::Vector2f(0, 0);
 	drawing_mode = true;
@@ -92,16 +93,10 @@ void TileArtGui::onButtonClick(string button) {
 		layout->map_view->zoom(0.9);
 	}*/
 	else if (button == "save") {
-		cout << "save clicked" << endl;
-		/*sf::Texture temp = sf::Texture();
-		temp.create(w_size.x, w_size.y);
-		temp.update(*window);
-		sf::Image img = temp.copyToImage();*/
-		//cout << img.getPixelsPtr() << endl;
-		//cout << *(img.getPixelsPtr()) << endl;
-		//cout << img.getSize().x << img.getSize().y << endl;
 		sf::Image img = layout->map_view->grid->getImage();
-		img.saveToFile("test1.png");
+		if (img.saveToFile(output_file)){
+			cout << "Saved tile grid to file " << output_file << endl;
+		}
 	}
 	else if (button == "del") {
 		if (erase_mode) {
@@ -137,7 +132,6 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 		else if (layout->picker_view->containsMouse(mouse_pos_view)) {
 			window->setView(layout->picker_view->view);
 			mouse_pos_picker = (*window).mapPixelToCoords(mouse_pos_window);
-			//cout << mouse_pos_picker.x << ", " << mouse_pos_picker.y << endl;
 			if (layout->picker_view->grid->containsMouse(mouse_pos_picker)) {
 				layout->picker_view->grid->setSelectorRect(mouse_pos_picker, mouse_pos_picker);
 				selecting_now = true;
@@ -150,7 +144,6 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 		else if (layout->map_view->containsMouse(mouse_pos_view)) {
 			window->setView(layout->map_view->view);
 			mouse_pos_map = (*window).mapPixelToCoords(mouse_pos_window);
-			cout << mouse_pos_map.x << ", " << mouse_pos_map.y << endl;
 			if (layout->map_view->grid->containsMouse(mouse_pos_map)) {
 				drawing_now = true;
 				layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);
@@ -320,7 +313,6 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 				else if (rectangle_mode) {
 					m_coor2 = mouse_pos_map;
 					if (erase_mode) {
-						cout << "clearing rect" << endl;
 						layout->map_view->grid->clearRect(m_coor, m_coor2);
 					}
 					else {

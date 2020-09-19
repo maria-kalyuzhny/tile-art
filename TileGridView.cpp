@@ -70,14 +70,12 @@ void TileGridView::scroll(sf::Keyboard::Key key) {
 			s.y = s.y - s_delta;
 		}
 	}
-	cout << key << " scroll is now " << s.x << ", " << s.y << endl;
 }
 
 void TileGridView::centerOnGrid() {
 	sf::Vector2f center = view.getCenter();
 	if (this->w*z > this->grid->w && this->h*z > this->grid->h) {
 		view.setCenter(grid->w / 2, grid->h / 2);
-		cout << "center set to " << grid->w / 2 << ", " << grid->h / 2 << endl;
 	}
 	else if (this->w*z > this->grid->w) {
 		view.setCenter(grid->w/2, center.y);
