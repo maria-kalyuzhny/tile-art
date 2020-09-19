@@ -13,7 +13,6 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 	this->output_file = output_file;
 	t_coor = sf::Vector2f(0, 0); t_coor2 = sf::Vector2f(0, 0);
 	m_coor = sf::Vector2f(0, 0); m_coor2 = sf::Vector2f(0, 0);
-	drawing_mode = true;
 	rectangle_mode = false;
 	erase_mode = false;
 	drawing_now = false;
@@ -67,9 +66,6 @@ void TileArtGui::handleInput() {
 			case sf::Event::KeyPressed:
 				onKeyPressed(event.key.code);
 				break;
-	/*		case sf::Event::KeyReleased:
-				onKeyReleased(event.key.code);
-				break;*/
 			}
 			window->clear(layout->bg_color);
 			draw();
@@ -80,25 +76,16 @@ void TileArtGui::handleInput() {
 }
 
 void TileArtGui::onButtonClick(string button) {
-	if (button == "draw") {
-		drawing_mode = true;
-		rectangle_mode = false;
-	}
-	else if (button == "rect") {
-		rectangle_mode = true;
-		drawing_mode = false;
-	}
-	/*else if (button == "clear") {
-		layout->picker_view->zoom(1.1);
-		layout->map_view->zoom(0.9);
-	}*/
-	else if (button == "save") {
-		sf::Image img = layout->map_view->grid->getImage();
-		if (img.saveToFile(output_file)){
-			cout << "Saved tile grid to file " << output_file << endl;
+	if (button == "rectangle") {
+		if (rectangle_mode) {
+			rectangle_mode = false;
+		}
+		else {
+			rectangle_mode = true;
+			//select rectangle button
 		}
 	}
-	else if (button == "del") {
+	else if (button == "erase") {
 		if (erase_mode) {
 			erase_mode = false;
 		}
@@ -106,6 +93,16 @@ void TileArtGui::onButtonClick(string button) {
 			erase_mode = true;
 		}
 	}
+	else if (button == "save") {
+		sf::Image img = layout->map_view->grid->getImage();
+		if (img.saveToFile(output_file)){
+			cout << "Saved tile grid to file " << output_file << endl;
+		}
+	}
+	else if (button == "help") {
+		cout << "help button pressed" << endl;
+	}
+
 }
 
 void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view) {
@@ -147,7 +144,13 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 			if (layout->map_view->grid->containsMouse(mouse_pos_map)) {
 				drawing_now = true;
 				layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);
-				if (drawing_mode) {
+				if (rectangle_mode) {
+					m_coor = mouse_pos_map;
+					layout->map_view->grid->hidePosRect();
+					layout->map_view->grid->setSelectorRect(m_coor, m_coor);
+					layout->map_view->grid->showSelectorRect();
+				}
+				else {
 					layout->map_view->grid->showPosRect();
 					if (erase_mode) {
 						layout->map_view->grid->clear(mouse_pos_map);
@@ -155,12 +158,6 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 					else {
 						layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
 					}
-				}
-				else if (rectangle_mode) {
-					m_coor = mouse_pos_map;
-					layout->map_view->grid->hidePosRect();
-					layout->map_view->grid->setSelectorRect(m_coor, m_coor);
-					layout->map_view->grid->showSelectorRect();
 				}
 			}
 		}
@@ -240,7 +237,14 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 				if (layout->map_view->grid->containsMouse(mouse_pos_map)) {
 					layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);
 					if (drawing_now) {
-						if (drawing_mode) {
+						if (rectangle_mode) {
+							//m_rect = layout->map_view->grid->getTileRect(m_coor, m_coor2);
+							m_coor2 = mouse_pos_map;
+							layout->map_view->grid->hidePosRect();
+							layout->map_view->grid->setSelectorRect(m_coor, m_coor2);
+							layout->map_view->grid->showSelectorRect();
+						}
+						else {
 							layout->map_view->grid->showPosRect();
 							if (erase_mode) {
 								layout->map_view->grid->clear(mouse_pos_map);
@@ -248,13 +252,6 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 							else {
 								layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
 							}
-						}
-						else if (rectangle_mode) {
-							//m_rect = layout->map_view->grid->getTileRect(m_coor, m_coor2);
-							m_coor2 = mouse_pos_map;
-							layout->map_view->grid->hidePosRect();
-							layout->map_view->grid->setSelectorRect(m_coor, m_coor2);
-							layout->map_view->grid->showSelectorRect();
 						}
 					}
 					else layout->map_view->grid->showPosRect();
@@ -302,21 +299,21 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 		layout->map_view->grid->hideSelectorRect();
 		if (layout->map_view->grid->containsMouse(mouse_pos_map)) {
 			if (drawing_now) {
-				if (drawing_mode) {
-					if (erase_mode) {
-						layout->map_view->grid->clear(mouse_pos_map);
-					}
-					else {
-						layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
-					}
-				}
-				else if (rectangle_mode) {
+				if (rectangle_mode) {
 					m_coor2 = mouse_pos_map;
 					if (erase_mode) {
 						layout->map_view->grid->clearRect(m_coor, m_coor2);
 					}
 					else {
 						layout->map_view->grid->setTextureRect(m_coor, m_coor2, t_coor, t_coor2);
+					}
+				}
+				else {
+					if (erase_mode) {
+						layout->map_view->grid->clear(mouse_pos_map);
+					}
+					else {
+						layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
 					}
 				}
 				layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);
@@ -353,14 +350,6 @@ void TileArtGui::onKeyPressed(sf::Keyboard::Key key) {
 		layout->map_view->scroll(key); 
 	}
 }
-
-//
-//void TileArtGui::onKeyReleased(sf::Keyboard::Key key) {
-//	//if (key == sf::Keyboard::Key::LShift) {
-//	//	shift_down == false;
-//	//}
-//}
-
 
 void TileArtGui::onResize(sf::Vector2f w_size) {
 	window_view.reset(sf::FloatRect(0, 0, w_size.x, w_size.y));

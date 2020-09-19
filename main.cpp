@@ -26,12 +26,11 @@ const float menu_height = 0.08*init_height;
 const float init_divider_pos = 0.3 * init_width;
 const float divider_width = 0.005 * init_width;
 const int icon_size = 128;
-const static int num_buttons = 8;
+const static int num_buttons = 4;
 const static string button_names[num_buttons] = \
-{"load", "save", "save_as", "help", "draw", "rect", "del", "clear"};
+{"save", "help", "rectangle", "erase"};
 const static string button_icons[num_buttons] = \
-{ "./img/load.png", "./img/save.png", "./img/save_as.png", "./img/help.png",
-"./img/draw.png", "./img/rect.png", "./img/del.png", "./img/clear.png" };
+{ "./img/save.png", "./img/help.png", "./img/rectangle.png", "./img/erase.png" };
 const static string default_tileset="./img/transparent.png";
 
 /*global variables*/
@@ -46,54 +45,15 @@ sf::Vector2u texture_size;
 sf::Texture button_textures[num_buttons];
 
 /*function declarations*/
-sf::Texture loadTexture(string file);
-int parse_args(int argc, char** argv);
-
-int main(int argc, char** argv) {	
-	int pa = parse_args(argc, argv);
-	if (pa != 0) { return 1; }
-
-	/*Initialize all components of the GUI*/
-    
-	//Window
-	sf::RenderWindow window(sf::VideoMode(init_width,init_height), "Tile Art");
-	sf::Vector2f w_size = sf::Vector2f(init_width, init_height);
-    
-	//Button menu
-	ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
-	vector <Button> buttons(num_buttons);
-	for (int i = 0; i < num_buttons; i += 1) {
-		button_textures[i] = loadTexture(button_icons[i]);
-		buttons[i] = Button(10, 10, 10, 10, button_names[i], &button_textures[i]);
-		menu.addButton(&buttons[i], true);
-	}
-    
-	//Views containing tile picker and user-created tilemap
-	TileGrid picker = TileGrid(tile_size,static_cast<int>(texture_size.x/tile_size),
-		static_cast<int>(texture_size.y/tile_size),&texture);
-	TileGrid map = TileGrid(tile_size, map_w, map_h, &texture);   
-	TileGridView picker_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &picker);
-	TileGridView map_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &map);
-	sf::FloatRect view_layout_rect = sf::FloatRect(0, menu_height, init_width, init_height - menu_height);
-	ViewLayout view_layout = ViewLayout(view_layout_rect, w_size, &picker_view, &map_view, init_divider_pos);
-	//Set tile grid in picker to look the same as the original image 
-	picker.setTextureRect(sf::Vector2f(0, 0), sf::Vector2f(texture_size.x - tile_size, texture_size.y - tile_size),
-		sf::Vector2f(0, 0), sf::Vector2f(texture_size.x - tile_size, texture_size.y - tile_size));
-
-	/*Initialize the GUI and handle input*/
-	TileArtGui gui = TileArtGui(&window, &menu, &view_layout, output_file);
-	gui.handleInput();
-	return 0;
-}
 
 sf::Texture loadTexture(string file) {
-    sf::Texture texture;
-    if (!texture.loadFromFile(file))
-    {
-        cout << "Failed to load texture\n";
-        exit(1);
-    }
-    return texture;
+	sf::Texture texture;
+	if (!texture.loadFromFile(file))
+	{
+		std::cerr << "Failed to load texture from file " << file << std::endl;
+		exit(1);
+	}
+	return texture;
 }
 
 int parse_args(int argc, char** argv) {
@@ -140,7 +100,7 @@ int parse_args(int argc, char** argv) {
 	}
 	else {
 		std::cout << "Tile size set to " << tile_size << "." << endl;
-		}
+	}
 	if (vm["width"].defaulted()) {
 		std::cout << "Grid width set to default value " << map_w << "." << endl;
 	}
@@ -176,6 +136,7 @@ int parse_args(int argc, char** argv) {
 		std::cerr << visible_options << std::endl;
 		return 1;
 	}
+
 	/* catch errors related to tileset file */
 	if (!boost::algorithm::ends_with(tileset_file, ".png") &&
 		!boost::algorithm::ends_with(tileset_file, ".gif") &&
@@ -192,12 +153,13 @@ int parse_args(int argc, char** argv) {
 	texture_size = texture_img.getSize();
 	if (texture_size.x % tile_size != 0 || texture_size.y % tile_size != 0) {
 		std::cerr << "Error: The tile atlas image file " << tileset_file << " does not have a "
-				"whole number of tiles. The image width and height must be evenly divisible "
-				"by the tile size, " << tile_size << "." << endl;
+			"whole number of tiles. The image width and height must be evenly divisible "
+			"by the tile size, " << tile_size << "." << endl;
 		std::cerr << visible_options << std::endl;
 		return 1;
 	}
 	texture.loadFromImage(texture_img);
+
 	/* catch errors related to output file */
 	if (vm.count("output")) {
 
@@ -216,5 +178,42 @@ int parse_args(int argc, char** argv) {
 		std::cerr << visible_options << std::endl;
 		return 1;
 	}
+	return 0;
+}
+
+int main(int argc, char** argv) {	
+	int pa = parse_args(argc, argv);
+	if (pa != 0) { return 1; }
+
+	/*Initialize all components of the GUI*/
+    
+	//Window
+	sf::RenderWindow window(sf::VideoMode(init_width,init_height), "Tile Art");
+	sf::Vector2f w_size = sf::Vector2f(init_width, init_height);
+    
+	//Button menu
+	ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
+	vector <Button> buttons(num_buttons);
+	for (int i = 0; i < num_buttons; i += 1) {
+		button_textures[i] = loadTexture(button_icons[i]);
+		buttons[i] = Button(10, 10, 10, 10, button_names[i], &button_textures[i]);
+		menu.addButton(&buttons[i], true);
+	}
+    
+	//Views containing tile picker and user-created tilemap
+	TileGrid picker = TileGrid(tile_size,static_cast<int>(texture_size.x/tile_size),
+		static_cast<int>(texture_size.y/tile_size),&texture);
+	TileGrid map = TileGrid(tile_size, map_w, map_h, &texture);   
+	TileGridView picker_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &picker);
+	TileGridView map_view = TileGridView(sf::FloatRect(0, 0, 0, 0), w_size, &map);
+	sf::FloatRect view_layout_rect = sf::FloatRect(0, menu_height, init_width, init_height - menu_height);
+	ViewLayout view_layout = ViewLayout(view_layout_rect, w_size, &picker_view, &map_view, init_divider_pos);
+	//Set tile grid in picker to look the same as the original image 
+	picker.setTextureRect(sf::Vector2f(0, 0), sf::Vector2f(texture_size.x - tile_size, texture_size.y - tile_size),
+		sf::Vector2f(0, 0), sf::Vector2f(texture_size.x - tile_size, texture_size.y - tile_size));
+
+	/*Initialize the GUI and handle input*/
+	TileArtGui gui = TileArtGui(&window, &menu, &view_layout, output_file);
+	gui.handleInput();
 	return 0;
 }
