@@ -77,15 +77,16 @@ void TileArtGui::handleInput() {
 
 void TileArtGui::onButtonClick(string button) {
 	if (button == "rectangle") {
+		menu->getButton(button)->toggle();
 		if (rectangle_mode) {
 			rectangle_mode = false;
 		}
 		else {
 			rectangle_mode = true;
-			//select rectangle button
 		}
 	}
 	else if (button == "erase") {
+		menu->getButton(button)->toggle();
 		if (erase_mode) {
 			erase_mode = false;
 		}
@@ -112,9 +113,9 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 			if (button->containsMouse(mouse_pos_view)) {
 				onButtonClick(button->name);
 			}
-			else {
-				button->setColor(button->button_color);
-			}
+			//else {
+			//	button->setColor(button->button_color);
+			//}
 		}
 	}
 	if (layout->containsMouse(mouse_pos_view)) {
@@ -171,16 +172,11 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 	if (menu->containsMouse(mouse_pos_view)) {
 		for (auto button : menu->buttons) {
 			if (button->containsMouse(mouse_pos_view)) {
-				button->setColor(button->button_select_color);
+				button->hover();
 			}
 			else {
-				button->setColor(button->button_color);
+				button->unhover();
 			}
-		}
-	}
-	else {
-		for (auto button : menu->buttons) {
-			button->setColor(button->button_color);
 		}
 	}
 	/* move divider */

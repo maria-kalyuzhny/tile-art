@@ -9,7 +9,11 @@ class GuiElement : public sf::Drawable, public sf::Transformable
 {
 public:
 	const static sf::Color button_color;
+	const static sf::Color button_hover_color;
 	const static sf::Color button_select_color;
+	const static sf::Color button_outline_color;
+	const static sf::Color button_hover_outline_color;
+	const static sf::Color button_select_outline_color;
 	const static sf::Color menu_color;
 	const static sf::Color bg_color;
 	const static sf::Color grid_bg_color;
@@ -21,6 +25,7 @@ public:
 	const static sf::Color pos_outline_color;
 	const static sf::Color pos_fill_color;
 	const static int outline_width = -3;
+	const static int button_outline_width = 2;
 
 	float x, y, w, h;
 	bool visible;

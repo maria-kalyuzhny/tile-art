@@ -1,8 +1,12 @@
 #include "GuiElement.h"
 
 const sf::Color GuiElement::button_color = sf::Color(60,60,60);
-const sf::Color GuiElement::button_select_color = sf::Color(80,80,80);
-const sf::Color GuiElement::menu_color = sf::Color(45,45,45);
+const sf::Color GuiElement::button_hover_color = sf::Color(40,40,40);
+const sf::Color GuiElement::button_select_color = sf::Color(20,20,20);
+const sf::Color GuiElement::button_outline_color = sf::Color::Transparent;
+const sf::Color GuiElement::button_hover_outline_color = sf::Color(80, 80, 80);
+const sf::Color GuiElement::button_select_outline_color = sf::Color(100,100,100);
+const sf::Color GuiElement::menu_color = sf::Color(60,60,60);
 const sf::Color GuiElement::bg_color = sf::Color(30,30,30);
 const sf::Color GuiElement::divider_color = sf::Color(60,60,60);
 const sf::Color GuiElement::grid_bg_color = sf::Color(220,220,220);

@@ -5,6 +5,7 @@ Button::Button() {
 	this->texture = nullptr;
 	this->button_rect = sf::RectangleShape(sf::Vector2f(w, h));
 	this->icon_rect = sf::RectangleShape(sf::Vector2f(w, h));
+	this->selected = false;
 }
 
 Button::Button(float x, float y, float w, float h, string name, sf::Texture* texture) : GuiElement(x, y, w, h) {
@@ -16,23 +17,15 @@ Button::Button(float x, float y, float w, float h, string name, sf::Texture* tex
 	this->button_rect = sf::RectangleShape(sf::Vector2f(w, h));
 	this->button_rect.setPosition(x, y);
 	this->button_rect.setFillColor(button_color);
+	this->button_rect.setOutlineColor(button_outline_color);
+	this->button_rect.setOutlineThickness(button_outline_width);
 	this->icon_rect = sf::RectangleShape(sf::Vector2f(w, h));
 	this->icon_rect.setFillColor(sf::Color::White);
-	//this->texture_rect = sf::IntRect(0, 0, static_cast<int>(w), static_cast<int>(h));
 	this->icon_rect.setTexture(this->texture);
-	//this->icon_rect.setTextureRect(this->texture_rect);
+	this->selected = false;
 }
 
-//bool Button::mouseInButton(int coor_x, int coor_y) {
-//	if (coor_x >= this->x && coor_x <= this->x + this->w &&
-//		coor_y >= this->y && coor_y <= this->y + this->h) {
-//		return true;
-//	}
-//	return false;
-//}
-
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//states.texture = this->texture;
 	target.draw(this->button_rect);
 	target.draw(this->icon_rect);
 }
@@ -51,6 +44,37 @@ void Button::setPosition(float x, float y) {
 	this->icon_rect.setPosition(sf::Vector2f(x, y));
 }
 
-void Button::setColor(sf::Color color) {
-	this->button_rect.setFillColor(color);
+void Button::setColors(sf::Color fill, sf::Color outline) {
+	this->button_rect.setFillColor(fill);
+	this->button_rect.setOutlineColor(outline);
+}
+
+void Button::toggle() {
+	if (selected) {
+		selected = false;
+		setColors(button_color, button_outline_color);
+	}
+	else {
+		selected = true;
+		setColors(button_select_color, button_select_outline_color);
+	}
+}
+
+void Button::hover() {
+	if (!selected) {
+		setColors(button_hover_color, button_hover_outline_color);
+		//cout << "hovering over unselected button " << name << endl;
+	}
+	else {
+		//cout << "hovering over selected button " << name << endl;
+	}
+}
+
+void Button::unhover() {
+	if (!selected) {
+		setColors(button_color, button_outline_color);
+	}
+	else {
+		setColors(button_select_color, button_select_outline_color);
+	}
 }
