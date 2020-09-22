@@ -39,6 +39,7 @@ public:
 	sf::Image getImage();
 
 private:
+	int getOutlineWidth(); //determines outline with of selector rects based on tile size
 	int getVertexFromCoors(sf::Vector2f coors);
 	void generateVertices();
 	int getVertexFromRowCol(int row, int col);

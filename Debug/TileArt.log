@@ -1,5 +1,110 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TileEditor.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Button.cpp
-  GuiElement.cpp
-  Generating Code...
+  TileGrid.cpp
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(3,109): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(3,99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(10,58): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(10,56): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(11,59): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(11,56): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(12,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(13,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(113,65): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(113,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(164,22): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(164,19): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(175,9): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(183,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(184,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(194,49): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(194,42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(195,57): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(195,50): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(196,61): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(196,50): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(197,57): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(197,46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(220,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(219,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(237,65): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Maria\Projects\TileArt\TileArt\TileGrid.cpp(237,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   TileArt.vcxproj -> C:\Users\Maria\Projects\TileArt\Debug\TileArt.exe

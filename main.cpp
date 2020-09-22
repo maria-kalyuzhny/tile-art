@@ -24,7 +24,6 @@ const float init_width = 0.8*sf::VideoMode::getDesktopMode().width;
 const float init_height = 0.8*sf::VideoMode::getDesktopMode().height;
 const float menu_height = 0.08*init_height;
 const float init_divider_pos = 0.3 * init_width;
-const float divider_width = 0.005 * init_width;
 const int icon_size = 128;
 const static int num_buttons = 4;
 const static string button_names[num_buttons] = \

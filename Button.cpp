@@ -18,7 +18,7 @@ Button::Button(float x, float y, float w, float h, string name, sf::Texture* tex
 	this->button_rect.setPosition(x, y);
 	this->button_rect.setFillColor(button_color);
 	this->button_rect.setOutlineColor(button_outline_color);
-	this->button_rect.setOutlineThickness(button_outline_width);
+	this->button_rect.setOutlineThickness(button_outline_thickness);
 	this->icon_rect = sf::RectangleShape(sf::Vector2f(w, h));
 	this->icon_rect.setFillColor(sf::Color::White);
 	this->icon_rect.setTexture(this->texture);

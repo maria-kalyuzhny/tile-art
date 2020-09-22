@@ -4,18 +4,19 @@ const sf::Color GuiElement::button_color = sf::Color(60,60,60);
 const sf::Color GuiElement::button_hover_color = sf::Color(40,40,40);
 const sf::Color GuiElement::button_select_color = sf::Color(20,20,20);
 const sf::Color GuiElement::button_outline_color = sf::Color::Transparent;
-const sf::Color GuiElement::button_hover_outline_color = sf::Color(80, 80, 80);
-const sf::Color GuiElement::button_select_outline_color = sf::Color(100,100,100);
+const sf::Color GuiElement::button_hover_outline_color = sf::Color(90, 90, 90);
+const sf::Color GuiElement::button_select_outline_color = sf::Color(110,110,110);
 const sf::Color GuiElement::menu_color = sf::Color(60,60,60);
-const sf::Color GuiElement::bg_color = sf::Color(30,30,30);
+const sf::Color GuiElement::bg_color = sf::Color(40,40,40);
 const sf::Color GuiElement::divider_color = sf::Color(60,60,60);
-const sf::Color GuiElement::grid_bg_color = sf::Color(220,220,220);
+const sf::Color GuiElement::grid_bg_color = sf::Color(10,10,10);
 const sf::Color GuiElement::border_color = sf::Color(80,80,80);
 const sf::Color GuiElement::tile_border_color = sf::Color::White;
-const sf::Color GuiElement::selector_outline_color = sf::Color::Red;
-const sf::Color GuiElement::selector_fill_color = sf::Color(255,0,0,80);
-const sf::Color GuiElement::pos_outline_color = sf::Color::Green;
-const sf::Color GuiElement::pos_fill_color = sf::Color::Transparent;
+const sf::Color GuiElement::selector_outline_color = sf::Color(255, 200, 0, 100);
+const sf::Color GuiElement::selector_fill_color = sf::Color(80,80,0,80);
+const sf::Color GuiElement::pos_outline_color = sf::Color(255, 255, 255, 100);
+const sf::Color GuiElement::pos_fill_color = sf::Color(0, 0, 0, 50);
+const sf::Color GuiElement::view_outline_color = sf::Color(100,100,100,255);
 
 GuiElement::GuiElement() {
 	this->x = 0;

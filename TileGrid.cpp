@@ -9,12 +9,13 @@ TileGrid::TileGrid(int t, int w_tiles, int h_tiles, sf::Texture* texture) : GuiE
 	this->bg_rect.setFillColor(grid_bg_color);
 	this->selector_rect = sf::RectangleShape(sf::Vector2f(t,t));
 	this->selector_rect = sf::RectangleShape(sf::Vector2f(t, t));
-	this->selector_rect.setOutlineThickness(outline_width);
-	this->pos_rect.setOutlineThickness(outline_width);
+	this->selector_rect.setOutlineThickness(getOutlineWidth());
+	this->pos_rect.setOutlineThickness(getOutlineWidth());
 	hideSelectorRect();
 	hidePosRect();
 	generateVertices();
 }
+
 
 void TileGrid::clear(sf::Vector2f coors) {
 	int v = getVertexFromCoors(coors);
@@ -168,6 +169,11 @@ sf::Image TileGrid::getImage() {
 }
 
 /* private methods */
+
+
+int TileGrid::getOutlineWidth() {
+	return -((0.1*t)+1);
+}
 
 int TileGrid::getVertexFromCoors(sf::Vector2f coors) {
 	//if (coors.x < 0 || coors.y < 0 || coors.x >= t * w_tiles|| coors.y >= t * h_tiles) {
