@@ -5,106 +5,109 @@ TileGridView::TileGridView(const sf::FloatRect& rect, sf::Vector2f w_size, TileG
 	GuiElement(rect.left, rect.top, rect.width, rect.height) {
 	this->w_size = w_size;
 	this->grid = grid;
-	this->z = 1.0;
-	//this->max_scroll_x = this->grid->w;
-	//this->max_scroll_y = this->grid->h;
-	this->s = sf::Vector2f(0, 0);
-	//this->s_delta = 0.01 * w_size.y;
 	this->view = sf::View(sf::FloatRect(0,0,w,h));
 	this->view.setViewport(sf::FloatRect(x / w_size.x, y / w_size.y, w / w_size.x, h / w_size.y));
-	this->initZoom();
+	init_zoom=false;
 }
 
-void TileGridView::initZoom() {
-	fitToScreen();
+void TileGridView::initZoom(float in_zoom) {
+	//set initial zoom to fit the screen and save the original zoom value for future reference
+	default_zoom = in_zoom;
+	z = in_zoom;
+	cout << "init zoom set to" << z << endl;
+	init_zoom=true;
 }
 
 void TileGridView::reset(const sf::FloatRect& rect) {
 	this->x = rect.left; this->y = rect.top;
 	this->w = rect.width; this->h = rect.height;
 	resize(w, h);
-	//centerOnGrid();
-	view.setSize(w,h);
-	//view.setSize(w * z, h * z);
-	view.move(s);
+	full_zoom = std::max(grid->w / w, grid->h / h);
+	if (!init_zoom) {
+		initZoom(full_zoom);
+		default_zoom=full_zoom;
+		z = full_zoom;
+	}
+	view.setSize(w*z,h*z);
+	//view.move(-w/2 + (w*z)/2,-h/2 + (h*z)/2);
+	handleZoom();
 }
 
 void TileGridView::resize(float w, float h) {
 	view.reset(sf::FloatRect(0, 0, w, h));
 	view.setViewport(sf::FloatRect(x / w_size.x, y / w_size.y, w / w_size.x, h / w_size.y));
-	//centerOnGrid();
 }
 
 void TileGridView::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.setView(view);
 	target.draw(*grid);
+	//sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(500,250));
+	//target.draw(rect);
 }
 
 void TileGridView::zoom(int delta) {
-	//float temp_z = z - 0.1 * delta;
-	//if (temp_z <= max_zoom && temp_z >= min_zoom) {
-	//	this->z = temp_z;
-	//	view.setSize(w * z, h * z);
-	//	s_delta = 0.01*w_size.y*z;
-	//}
+	float temp_z;
+	if (delta < 0) {
+		for (int i = 0; i >= delta; i -= 1) {
+			temp_z = z + 0.01;
+			if (temp_z <= max_zoom*default_zoom) {
+				z = temp_z;
+				view.setSize(w * z, h * z);
+				handleZoom();
+			}
+		}
+	}
+	else if (delta > 0) {
+		for (int i = 0; i <= delta; i += 1) {
+			temp_z = z - 0.01;
+			if (temp_z >= min_zoom*default_zoom) {
+				z = temp_z;
+				view.setSize(w * z, h * z);
+				handleZoom();
+			}
+		}
+	}
 }
 
-void TileGridView::scroll(sf::Keyboard::Key key) {
-	//do nothing for now - only testing zoom.
-	return;
-	/*if (key == sf::Keyboard::Key::A) {
-		if (s.x + s_delta < max_scroll_x) {
-			view.move(s_delta, 0);
-			s.x = s.x + s_delta;
-		}
-
+void TileGridView::handleZoom() {
+	cout << "zoom " << z << endl;
+	cout << "view width " << w << endl;
+	cout << "grid width " << grid->w / z << endl;
+	if (w - grid->w / z > 0) {
+		view.setCenter(grid->w / 2, view.getCenter().y);
 	}
-	else if (key == sf::Keyboard::Key::D) {
-		if (s.x - s_delta > -max_scroll_x) {
-			view.move(-s_delta, 0);
-			s.x = s.x - s_delta;
-		}
+	else {
+		view.setCenter(w/2, view.getCenter().y);
+		view.move(-w / 2 + (w * z) / 2, 0);
+		cout << "moving view x " << -w / 2 + (w * z) / 2 << endl;
 	}
-	else if (key == sf::Keyboard::Key::W) {
-		if (s.y + s_delta < max_scroll_y) {
-			view.move(0, s_delta);
-			s.y = s.y + s_delta;
-		}
+	if (h - grid->h / z > 0) {
+		view.setCenter(view.getCenter().x, grid->h / 2);
 	}
-	else if (key == sf::Keyboard::Key::S) {
-		if (s.y - s_delta > -max_scroll_y) {
-			view.move(0, -s_delta);
-			s.y = s.y - s_delta;
-		}
-	}*/
+	else {
+		view.setCenter(view.getCenter().x, h / 2);
+		view.move(0, -h / 2 + (h * z) / 2);
+	}
 }
-
-//void TileGridView::centerOnGrid() {
-//	sf::Vector2f center = view.getCenter();
-//	if (this->w*z > this->grid->w && this->h*z > this->grid->h) {
-//		view.setCenter(grid->w / 2, grid->h / 2);
-//	}
-//	else if (this->w*z > this->grid->w) {
-//		view.setCenter(grid->w/2, center.y);
-//	}
-//	else if (this->h*z > this->grid->h) {
-//		view.setCenter(center.x, grid->h/2);
-//	}
-//}
 
 void TileGridView::centerOnGrid() {
-	view.setCenter(grid->w / 2, grid->h / 2);
+	cout << "zoom " << z << endl;
+	cout << "view width " << w << endl;
+	cout << "grid width " << grid->w/z << endl;
+	if (w - grid->w/z > 0) {
+		view.setCenter(grid->w/2,view.getCenter().y);
+	}
+	if (h - grid->h/z > 0) {
+		view.setCenter(view.getCenter().x, grid->h/2);
+	}
 }
 
 void TileGridView::fitToScreen() {
-	float x_ratio = w/grid->w;
-	float y_ratio = h/grid->h;
-	float zoom_ratio = std::min(x_ratio, y_ratio);
-	view.zoom(1/zoom_ratio);
-	full_zoom=1/zoom_ratio;
-	cout << full_zoom << endl;
-	cout << full_zoom/2 << endl;
-	centerOnGrid();
+	float x_ratio = grid->w/w;
+	float y_ratio = grid->h/h;
+	z = std::max(x_ratio, y_ratio);
+	cout << "init zoom set to" << z << endl;
+	view.setSize(w*z,h*z);
 }
 
 void TileGridView::updateWindow(sf::Vector2f w_size) {

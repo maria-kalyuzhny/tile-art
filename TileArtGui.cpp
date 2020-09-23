@@ -113,9 +113,6 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 			if (button->containsMouse(mouse_pos_view)) {
 				onButtonClick(button->name);
 			}
-			//else {
-			//	button->setColor(button->button_color);
-			//}
 		}
 	}
 	if (layout->containsMouse(mouse_pos_view)) {
@@ -130,6 +127,7 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 		else if (layout->picker_view->containsMouse(mouse_pos_view)) {
 			window->setView(layout->picker_view->view);
 			mouse_pos_picker = (*window).mapPixelToCoords(mouse_pos_window);
+			cout << mouse_pos_picker.x << ", " << mouse_pos_picker.y << endl;
 			if (layout->picker_view->grid->containsMouse(mouse_pos_picker)) {
 				layout->picker_view->grid->setSelectorRect(mouse_pos_picker, mouse_pos_picker);
 				selecting_now = true;
@@ -142,6 +140,7 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 		else if (layout->map_view->containsMouse(mouse_pos_view)) {
 			window->setView(layout->map_view->view);
 			mouse_pos_map = (*window).mapPixelToCoords(mouse_pos_window);
+			cout << mouse_pos_map.x << ", " << mouse_pos_map.y << endl;
 			if (layout->map_view->grid->containsMouse(mouse_pos_map)) {
 				drawing_now = true;
 				layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);
@@ -330,6 +329,7 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 }
 
 void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {
+	std::cout << "delta" << delta << endl;
 	if (layout->picker_view->containsMouse(mouse_pos_view)) {
 		layout->picker_view->zoom(delta);
 	}
@@ -340,10 +340,12 @@ void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {
 
 void TileArtGui::onKeyPressed(sf::Keyboard::Key key) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		layout->picker_view->scroll(key);
+		//layout->picker_view->scroll(key);
+		return;
 	}
 	else {
-		layout->map_view->scroll(key); 
+		//layout->map_view->scroll(key); 
+		return;
 	}
 }
 

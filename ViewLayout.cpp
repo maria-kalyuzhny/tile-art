@@ -6,10 +6,8 @@ ViewLayout::ViewLayout(sf::FloatRect rect, sf::Vector2f w_size, TileGridView* pi
 	this->w_size = w_size;
 	this->picker_view = picker_view;
 	this->picker_view->reset(sf::FloatRect(x, y, div_x, h));
-	this->picker_view->initZoom();
 	this->map_view = map_view;
 	this->map_view->reset(sf::FloatRect(div_x + div_width, y, w - div_x - div_width, h));
-	this->map_view->initZoom();
 	this->divider = sf::RectangleShape(sf::Vector2f(div_width, h));
 	this->divider.setPosition(this->div_x, this->y);
 	this->divider.setFillColor(this->divider_color);

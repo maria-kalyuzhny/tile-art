@@ -25,7 +25,6 @@ public:
 	const static sf::Color pos_outline_color;
 	const static sf::Color pos_fill_color;
 	const static sf::Color view_outline_color;
-	//const static int outline_width = -3;
 	const static int button_outline_thickness = 2;
 	const static int view_outline_thickness = -2;
 	const static int divider_limit = 15;
