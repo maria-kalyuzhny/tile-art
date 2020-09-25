@@ -64,7 +64,7 @@ void TileArtGui::handleInput() {
 				onMouseWheelMoved(mouse_pos_view, event.mouseWheel.delta);
 				break;
 			case sf::Event::KeyPressed:
-				onKeyPressed(event.key.code);
+				onKeyPressed(mouse_pos_view, event.key.code);
 				break;
 			}
 			window->clear(layout->bg_color);
@@ -338,13 +338,13 @@ void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {
 	}
 }
 
-void TileArtGui::onKeyPressed(sf::Keyboard::Key key) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		//layout->picker_view->scroll(key);
+void TileArtGui::onKeyPressed(sf::Vector2f mouse_pos_view, sf::Keyboard::Key key) {
+	if (layout->picker_view->containsMouse(mouse_pos_view)) {
+		layout->picker_view->scroll(key);
 		return;
 	}
-	else {
-		//layout->map_view->scroll(key); 
+	else if (layout->map_view->containsMouse(mouse_pos_view)) {
+		layout->map_view->scroll(key); 
 		return;
 	}
 }

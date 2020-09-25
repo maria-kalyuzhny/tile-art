@@ -42,7 +42,7 @@ private:
 	void onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta);
-	void onKeyPressed(sf::Keyboard::Key key);
+	void onKeyPressed(sf::Vector2f mouse_pos_view, sf::Keyboard::Key key);
 	void onResize(sf::Vector2f w_size);
 };
 

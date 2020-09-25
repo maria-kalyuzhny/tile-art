@@ -1,7 +1,8 @@
 #pragma once
+#include <math.h>
+#include <SFML/Graphics.hpp>
 #include "GuiElement.h"
 #include "TileGrid.h"
-#include <SFML/Graphics.hpp>>
 
 //Contains an sf::View which displays one TileGrid.
 //TileGridView's view rectangle and Viewport are maintained to be the same size to avoid skewing/changing scale.
@@ -15,16 +16,18 @@ public:
 	sf::Vector2f w_size;
 	//float full_zoom;
 	float z;
+	sf::Vector2f s;
 
 	TileGridView(const sf::FloatRect& rect, sf::Vector2f w_size, TileGrid* grid);
 	void zoom(int delta);
-	//void scroll(sf::Keyboard::Key key);
+	void scroll(sf::Keyboard::Key key);
 	void resize(float w, float h);
 	void reset(const sf::FloatRect& rect);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void fitToScreen();
 	void centerOnGrid();
 	void initZoom(float in_zoom);
+	void handleResize();
 	void handleZoom();
 	void updateWindow(sf::Vector2f w_size);
 private:

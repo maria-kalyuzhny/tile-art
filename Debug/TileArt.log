@@ -1,7 +1,7 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TileEditor.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   TileGridView.cpp
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(38,29): warning C4305: 'initializing': truncation from 'double' to 'const float'
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(52,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(62,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(41,29): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(11,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(54,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(64,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   TileArt.vcxproj -> C:\Users\Maria\Projects\TileArt\Debug\TileArt.exe
