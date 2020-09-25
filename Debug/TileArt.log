@@ -2,6 +2,6 @@
   TileGridView.cpp
 C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(41,29): warning C4305: 'initializing': truncation from 'double' to 'const float'
 C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(11,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(54,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(64,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(53,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.cpp(63,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   TileArt.vcxproj -> C:\Users\Maria\Projects\TileArt\Debug\TileArt.exe

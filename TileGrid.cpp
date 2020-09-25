@@ -46,6 +46,9 @@ void TileGrid::clearRect(sf::Vector2f coor1, sf::Vector2f coor2) {
 
 void TileGrid::setTextureCoors(sf::Vector2f coors, sf::Vector2f t_coors) {
 	int v = getVertexFromCoors(coors);
+	if (coors.x < 0 || coors.x >= w || coors.y < 0 || coors.y >= h) {
+		return;
+	}
 	t_coors = getTileCoors(t_coors);
 	if (vertices[v].color == sf::Color::Transparent) {
 		for (int i = v; i < v + 4; i++) {
