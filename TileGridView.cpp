@@ -30,8 +30,8 @@ void TileGridView::reset(const sf::FloatRect& rect) {
 		z = full_zoom;
 	}
 	view.setSize(w * z, h * z);
-	//view.move(-w/2 + (w*z)/2,-h/2 + (h*z)/2);
-	handleResize();
+	//handleResize();
+	handleZoom();
 }
 
 void TileGridView::resize(float w, float h) {
@@ -130,8 +130,9 @@ void TileGridView::handleResize() {
 	}
 	else {
 		view.setCenter(w/2, view.getCenter().y);
-		view.move(-w / 2 + (w * z) / 2, 0);
-		s.x=view.getCenter().x-grid->w/2;
+		//view.move(-w / 2 + (w * z) / 2, 0);
+		//s.x=view.getCenter().x-grid->w/2;
+		view.move(s.x,0);
 	}
 	if (h - grid->h / z > 0) {
 		view.setCenter(view.getCenter().x, grid->h / 2);
@@ -139,8 +140,9 @@ void TileGridView::handleResize() {
 	}
 	else {
 		view.setCenter(view.getCenter().x, h / 2);
-		view.move(0, -h / 2 + (h * z) / 2);
-		s.y = view.getCenter().y - grid->w / 2;
+		//view.move(0, -h / 2 + (h * z) / 2);
+		//s.y = view.getCenter().y - grid->w / 2;
+		view.move(0,s.y);
 	}
 }
 
