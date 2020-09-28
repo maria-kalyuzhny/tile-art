@@ -13,8 +13,10 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 	this->output_file = output_file;
 	t_coor = sf::Vector2f(0, 0); t_coor2 = sf::Vector2f(0, 0);
 	m_coor = sf::Vector2f(0, 0); m_coor2 = sf::Vector2f(0, 0);
+	pencil_mode = true;
 	rectangle_mode = false;
 	erase_mode = false;
+	fill_mode = false;
 	drawing_now = false;
 	selecting_now = false;
 	shift_down = false;
@@ -85,13 +87,32 @@ void TileArtGui::handleInput() {
 }
 
 void TileArtGui::onButtonClick(string button) {
-	if (button == "rectangle") {
-		menu->getButton(button)->toggle();
-		if (rectangle_mode) {
-			rectangle_mode = false;
+	if (button == "save") {
+		sf::Image img = layout->map_view->grid->getImage();
+		if (img.saveToFile(output_file)) {
+			cout << "Saved tile grid to file " << output_file << endl;
 		}
-		else {
+	}
+
+	else if (button == "pencil") {
+		if (!pencil_mode) {
+			pencil_mode = true;
+			rectangle_mode = false;
+			fill_mode = false;
+		}
+	}
+	else if (button == "rectangle") {
+		if (!rectangle_mode) {
+			pencil_mode=false;
 			rectangle_mode = true;
+			fill_mode=false;
+		}
+	}
+	else if (button == "fill") {
+		if (!rectangle_mode) {
+			rectangle_mode = false;
+			pencil_mode = false;
+			fill_mode = true;
 		}
 	}
 	else if (button == "erase") {
@@ -102,15 +123,6 @@ void TileArtGui::onButtonClick(string button) {
 		else {
 			erase_mode = true;
 		}
-	}
-	else if (button == "save") {
-		sf::Image img = layout->map_view->grid->getImage();
-		if (img.saveToFile(output_file)){
-			cout << "Saved tile grid to file " << output_file << endl;
-		}
-	}
-	else if (button == "help") {
-		cout << "help button pressed" << endl;
 	}
 
 }

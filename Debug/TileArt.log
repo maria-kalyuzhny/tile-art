@@ -2,12 +2,12 @@
   TileArtGui.cpp
 C:\Users\Maria\Projects\TileArt\TileArt\TileGridView.h(41,29): warning C4305: 'initializing': truncation from 'double' to 'const float'
 C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(8,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(45,55): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(47,55): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(45,37): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\TileArtGui.cpp(47,37): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
@@ -22,9 +22,9 @@ C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(25,31): warning C4244: 'initial
 C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(25,25): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
 C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(26,36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(26,30): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(194,51): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(194,40): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,100): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(193,51): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(193,40): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(218,100): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -33,7 +33,7 @@ C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,100): warning C4244: 'argum
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(218,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -42,7 +42,7 @@ C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,72): warning C4244: 'argume
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(220,79): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,79): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -51,7 +51,7 @@ C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(220,79): warning C4244: 'argume
           [
               T=float
           ]
-C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(220,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Maria\Projects\TileArt\TileArt\main.cpp(219,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int

@@ -20,7 +20,9 @@ public:
 	sf::View window_view;
 	ButtonMenu* menu;
 	ViewLayout* layout;
+	bool pencil_mode;
 	bool rectangle_mode;
+	bool fill_mode;
 	bool erase_mode;
 	bool drawing_now;
 	bool selecting_now;

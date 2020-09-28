@@ -25,15 +25,14 @@ const float init_height = 0.8*sf::VideoMode::getDesktopMode().height;
 const float menu_height = 0.08*init_height;
 const float init_divider_pos = 0.3 * init_width;
 const int icon_size = 128;
-const static int num_buttons = 4;
+const static int num_buttons = 6;
 const static string button_names[num_buttons] = \
-{"save", "help", "rectangle", "erase"};
+{"save", "fit", "pencil", "rectangle", "fill", "erase"};
 const static string button_icons[num_buttons] = \
-{ "./img/save.png", "./img/help.png", "./img/rectangle.png", "./img/erase.png" };
+{ "./img/save.png", "./img/fit.png", "./img/pencil.png", 
+  "./img/rectangle.png", "./img/fill.png", "./img/erase.png" };
 const static string button_descriptions[num_buttons] = \
-{ "Save (Ctrl+S)", "Help", "Rectangle", "Eraser" };
-//real button list will be
-//Save (Ctrl+S) Help(?) Fit Screen (F) Draw (D) Rectangle (R) Bucket Fill (B) Eraser (E)
+{ "Save", "Fit screen", "Pencil", "Rectangle", "Fill", "Toggle eraser" };
 const static string default_tileset="./img/transparent.png";	
 
 /*global variables*/
