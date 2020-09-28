@@ -197,6 +197,7 @@ int main(int argc, char** argv) {
 	//Button menu
 	ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
 	vector <Button> buttons(num_buttons);
+	vector <TextBox> descriptions(num_buttons);
 	//sf::Font font;
 	//if (!font.loadFromFile("./img/DejaVuSansMono.ttf")) {
 	//	std::cerr << "Unable to load font DejaVuSansMono.ttf" << endl;
@@ -204,8 +205,11 @@ int main(int argc, char** argv) {
 	//}
 	for (int i = 0; i < num_buttons; i += 1) {
 		button_textures[i] = loadTexture(button_icons[i]);
+		descriptions[i] = TextBox(0, 0, GuiElement::textbox_width,
+			GuiElement::text_padding*2+GuiElement::font_size, button_descriptions[i]);
 		buttons[i] = Button(0, 0, 0, 0, button_names[i], &button_textures[i]);
 		menu.addButton(&buttons[i], true);
+		buttons[i].addDescription(&descriptions[i]);
 	}
     
 	//Views containing tile picker and user-created tilemap

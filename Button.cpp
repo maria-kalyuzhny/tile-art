@@ -23,11 +23,14 @@ Button::Button(float x, float y, float w, float h, string name, sf::Texture* tex
 	this->icon_rect.setFillColor(sf::Color::White);
 	this->icon_rect.setTexture(this->texture);
 	this->selected = false;
+	this->description = NULL;
+	//description->setPosition(x,y+h+button_textbox_offset);
 }
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(this->button_rect);
 	target.draw(this->icon_rect);
+	target.draw(*this->description);
 }
 
 void Button::resize(float w, float h) {
@@ -68,6 +71,7 @@ void Button::hover() {
 	else {
 		//cout << "hovering over selected button " << name << endl;
 	}
+	description->show();
 }
 
 void Button::unhover() {
@@ -77,4 +81,10 @@ void Button::unhover() {
 	else {
 		setColors(button_select_color, button_select_outline_color);
 	}
+	description->hide();
+}
+
+void Button::addDescription(TextBox* desc) {
+	description = desc;
+	description->setPosition(x, y + h + button_textbox_offset);
 }

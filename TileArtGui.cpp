@@ -178,6 +178,12 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 			}
 		}
 	}
+	else {
+		for (auto button : menu->buttons) {
+			button->unhover();
+			//button->hideDescription();
+		}
+	}
 	/* move divider */
 	if (layout->moving_divider) {
 		if (cursor.loadFromSystem(sf::Cursor::SizeHorizontal)) {

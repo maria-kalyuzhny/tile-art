@@ -1,27 +1,53 @@
 #include "TextBox.h"
 
+TextBox::TextBox() : GuiElement() {
+	box = sf::RectangleShape(sf::Vector2f(w,h));
+	box.setPosition(x,y);
+	box.setFillColor(textbox_fill_color);
+	box.setOutlineThickness(textbox_outline_thickness);
+	box.setOutlineColor(textbox_outline_color);
+	text.setString("");
+	text.setCharacterSize(font_size);
+	text.setFillColor(text_color);
+	text.setPosition(x + text_padding, y + text_padding);
+	hide();
+}
+
 TextBox::TextBox(float x, float y, float w, float h, string desc) : GuiElement(x, y, w, h) {
 	box = sf::RectangleShape(sf::Vector2f(w,h));
 	box.setPosition(x,y);
 	box.setFillColor(textbox_fill_color);
 	box.setOutlineThickness(textbox_outline_thickness);
 	box.setOutlineColor(textbox_outline_color);
-	text.setFont(font);
 	text.setString(desc);
-	text.setCharacterSize(font_size); // in pixels, not points!
+	text.setFont(font);
+	text.setCharacterSize(font_size);
 	text.setFillColor(text_color);
 	text.setPosition(x+text_padding,y+text_padding);
+	hide();
 }
 
 void TextBox::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	return;
+	target.draw(box);
+	target.draw(text);
 }
 
 void TextBox::resize(float w, float h) {
-	return;
+	this->w = w;
+	this->h = h;
+	box.setSize(sf::Vector2f(w,h));
+}
+
+void TextBox::setPosition(float x, float y) {
+	this->x = x;
+	this->y = y;
+	box.setPosition(x,y);
+	text.setPosition(x+text_padding, y+text_padding);
 }
 
 void TextBox::show() {
+	cout << "showing textbox" << endl;
+	cout << "textbox size" << box.getSize().x << box.getSize().y << endl;
 	if (!visible) {
 		box.setFillColor(textbox_fill_color);
 		box.setOutlineColor(textbox_outline_color);

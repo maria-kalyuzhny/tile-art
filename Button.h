@@ -4,6 +4,7 @@
 #pragma warning(pop)
 #include <string>
 #include "GuiElement.h"
+#include "TextBox.h"
 using namespace std;
 
 class Button : public GuiElement
@@ -15,10 +16,12 @@ public:
 	sf::RectangleShape button_rect;
 	sf::RectangleShape icon_rect;
 	sf::RectangleShape desc_rect;
+	TextBox* description;
 	bool selected;
 
 	Button();
-	Button(float x, float y, float width, float height, string name = NULL, sf::Texture* texture = NULL);
+	Button(float x, float y, float width, float height, string name = NULL,
+		sf::Texture* texture = NULL);
 	void resize(float w, float h);
 	void setPosition(float x, float y);
 	void setColors(sf::Color fill, sf::Color outline);
@@ -26,6 +29,9 @@ public:
 	void toggle();
 	void hover();
 	void unhover();
+	void addDescription(TextBox* desc);
+	//void showDescription();
+	//void hideDescription();
 
 private:
 

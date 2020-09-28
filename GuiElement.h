@@ -13,8 +13,10 @@ public:
 	const static int textbox_outline_thickness = 2;
 	const static int divider_limit = 15;
 	const static int div_width = 15;
-	const static int font_size = 12;
+	const static int font_size = 22;
 	const static int text_padding = 10;
+	const static int button_textbox_offset = 20;
+	const static int textbox_width = 200;
 	const static sf::Color button_color;
 	const static sf::Color button_hover_color;
 	const static sf::Color button_select_color;
