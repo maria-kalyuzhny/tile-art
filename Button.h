@@ -14,6 +14,7 @@ public:
 	sf::Texture* texture;
 	sf::RectangleShape button_rect;
 	sf::RectangleShape icon_rect;
+	sf::RectangleShape desc_rect;
 	bool selected;
 
 	Button();

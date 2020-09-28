@@ -8,6 +8,13 @@ using namespace std;
 class GuiElement : public sf::Drawable, public sf::Transformable
 {
 public:
+	const static int button_outline_thickness = 2;
+	const static int view_outline_thickness = -2;
+	const static int textbox_outline_thickness = 2;
+	const static int divider_limit = 15;
+	const static int div_width = 15;
+	const static int font_size = 12;
+	const static int text_padding = 10;
 	const static sf::Color button_color;
 	const static sf::Color button_hover_color;
 	const static sf::Color button_select_color;
@@ -25,24 +32,23 @@ public:
 	const static sf::Color pos_outline_color;
 	const static sf::Color pos_fill_color;
 	const static sf::Color view_outline_color;
-	const static int button_outline_thickness = 2;
-	const static int view_outline_thickness = -2;
-	const static int divider_limit = 15;
-	const static int div_width = 15;
-
-
+	const static sf::Color textbox_fill_color;
+	const static sf::Color textbox_outline_color;
+	const static sf::Color text_color;
+	const static string font_file;
+	static sf::Font font;
+	static bool init_font;
+	
 	float x, y, w, h;
 	bool visible;
-	//bool scale_x;
-	//bool scale_y;
 
 	GuiElement();
 	GuiElement(float x, float y, float w, float h);
 	virtual void resize(float w, float h) = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	//virtual void scale(float x_ratio, float y_ratio);
 	bool containsMouse(sf::Vector2f mouse);
 private:
+	bool initFont();
 };
 
 

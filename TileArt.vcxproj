@@ -155,6 +155,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonMenu.cpp" />
     <ClCompile Include="GuiElement.cpp" />
+    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TileArtGui.cpp" />
     <ClCompile Include="TileGridView.cpp" />
     <ClCompile Include="TileGrid.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonMenu.h" />
     <ClInclude Include="GuiElement.h" />
+    <ClInclude Include="TextBox.h" />
     <ClInclude Include="TileArtGui.h" />
     <ClInclude Include="TileGridView.h" />
     <ClInclude Include="TileGrid.h" />

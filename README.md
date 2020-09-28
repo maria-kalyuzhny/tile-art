@@ -41,5 +41,7 @@ The following default tilesets are included in the /img folder to play around wi
 
 ###Future Scope
 -Integrate Windows API to allow saving and loading without using the terminal
+-Add undo
 -Add layers tool
+-Add drag tool
 -Allow save as 2D array for easy integration with game code

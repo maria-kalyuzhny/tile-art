@@ -17,6 +17,12 @@ const sf::Color GuiElement::selector_fill_color = sf::Color(80,80,0,80);
 const sf::Color GuiElement::pos_outline_color = sf::Color(255, 255, 255, 100);
 const sf::Color GuiElement::pos_fill_color = sf::Color(0, 0, 0, 50);
 const sf::Color GuiElement::view_outline_color = sf::Color(100,100,100,255);
+const sf::Color GuiElement::textbox_fill_color = sf::Color(255,200,0);
+const sf::Color GuiElement::textbox_outline_color = sf::Color(80,80,80);
+const sf::Color GuiElement::text_color = sf::Color::Black;
+const string GuiElement::font_file = "./img/DejaVuSansMono.ttf";
+bool GuiElement::init_font = false;
+sf::Font GuiElement::font = sf::Font();
 
 GuiElement::GuiElement() {
 	this->x = 0;
@@ -24,6 +30,9 @@ GuiElement::GuiElement() {
 	this->w = 0;
 	this->h = 0;
 	this->visible = true;
+	if (!init_font) {
+		initFont();
+	}
 }
 
 GuiElement::GuiElement(float x, float y, float w, float h) {
@@ -33,6 +42,9 @@ GuiElement::GuiElement(float x, float y, float w, float h) {
 	this->w = w;
 	this->h = h;
 	this->visible = true;
+	if (!init_font) {
+		initFont();
+	}
 }
 
 void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -46,4 +58,14 @@ bool GuiElement::containsMouse(sf::Vector2f mouse) {
 		return true;
 	}
 	return false;
+}
+
+bool GuiElement::initFont() {
+	cout << "loading font" << endl;
+	if (!font.loadFromFile(font_file)) {
+		std::cerr << "Unable to load font " << font_file << endl;
+		return false;
+	}
+	init_font=true;
+	return true;
 }

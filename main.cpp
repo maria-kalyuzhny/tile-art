@@ -30,7 +30,11 @@ const static string button_names[num_buttons] = \
 {"save", "help", "rectangle", "erase"};
 const static string button_icons[num_buttons] = \
 { "./img/save.png", "./img/help.png", "./img/rectangle.png", "./img/erase.png" };
-const static string default_tileset="./img/transparent.png";
+const static string button_descriptions[num_buttons] = \
+{ "Save (Ctrl+S)", "Help", "Rectangle", "Eraser" };
+//real button list will be
+//Save (Ctrl+S) Help(?) Fit Screen (F) Draw (D) Rectangle (R) Bucket Fill (B) Eraser (E)
+const static string default_tileset="./img/transparent.png";	
 
 /*global variables*/
 int tile_size;
@@ -193,9 +197,14 @@ int main(int argc, char** argv) {
 	//Button menu
 	ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
 	vector <Button> buttons(num_buttons);
+	//sf::Font font;
+	//if (!font.loadFromFile("./img/DejaVuSansMono.ttf")) {
+	//	std::cerr << "Unable to load font DejaVuSansMono.ttf" << endl;
+	//	return 1;
+	//}
 	for (int i = 0; i < num_buttons; i += 1) {
 		button_textures[i] = loadTexture(button_icons[i]);
-		buttons[i] = Button(10, 10, 10, 10, button_names[i], &button_textures[i]);
+		buttons[i] = Button(0, 0, 0, 0, button_names[i], &button_textures[i]);
 		menu.addButton(&buttons[i], true);
 	}
     
