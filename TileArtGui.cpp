@@ -18,6 +18,7 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 	drawing_now = false;
 	selecting_now = false;
 	shift_down = false;
+	mouse_in_curr_button = false;
 }
 
 void TileArtGui::draw() {
@@ -71,6 +72,14 @@ void TileArtGui::handleInput() {
 			draw();
 			window->display();
 
+		}
+		if (clock.getElapsedTime().asSeconds() >= delay &&
+			mouse_in_curr_button && curr_button) {
+			cout << "showing description" << endl;
+			curr_button->description->show();
+			window->clear(layout->bg_color);
+			draw();
+			window->display();
 		}
 	}
 }
@@ -169,19 +178,24 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 	sf::Cursor cursor;
 	/* highlight buttons when hovering over them */
 	if (menu->containsMouse(mouse_pos_view)) {
+		mouse_in_curr_button=false;
 		for (auto button : menu->buttons) {
+			//button->description->hide();
 			if (button->containsMouse(mouse_pos_view)) {
 				button->hover();
+				curr_button = button;
+				mouse_in_curr_button=true;
 			}
 			else {
 				button->unhover();
+				button->description->hide();
 			}
 		}
 	}
 	else {
+		mouse_in_curr_button = false;
 		for (auto button : menu->buttons) {
 			button->unhover();
-			//button->hideDescription();
 		}
 	}
 	/* move divider */
@@ -266,6 +280,7 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 		layout->map_view->grid->hidePosRect();
 	}
 	window->setView(window_view);
+	clock.restart();
 }
 
 void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view) {
@@ -331,7 +346,6 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 		selecting_now = false;
 	}
 	window->setView(window_view);
-	//layout->picker_view->zoom(1.1);
 }
 
 void TileArtGui::onMouseWheelMoved(sf::Vector2f mouse_pos_view, int delta) {

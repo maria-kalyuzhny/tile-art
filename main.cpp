@@ -198,11 +198,6 @@ int main(int argc, char** argv) {
 	ButtonMenu menu = ButtonMenu(0, 0, init_width, menu_height);
 	vector <Button> buttons(num_buttons);
 	vector <TextBox> descriptions(num_buttons);
-	//sf::Font font;
-	//if (!font.loadFromFile("./img/DejaVuSansMono.ttf")) {
-	//	std::cerr << "Unable to load font DejaVuSansMono.ttf" << endl;
-	//	return 1;
-	//}
 	for (int i = 0; i < num_buttons; i += 1) {
 		button_textures[i] = loadTexture(button_icons[i]);
 		descriptions[i] = TextBox(0, 0, GuiElement::textbox_width,

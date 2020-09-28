@@ -71,7 +71,7 @@ void Button::hover() {
 	else {
 		//cout << "hovering over selected button " << name << endl;
 	}
-	description->show();
+	//description->show();
 }
 
 void Button::unhover() {
@@ -81,7 +81,7 @@ void Button::unhover() {
 	else {
 		setColors(button_select_color, button_select_outline_color);
 	}
-	description->hide();
+	//description->hide();
 }
 
 void Button::addDescription(TextBox* desc) {

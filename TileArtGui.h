@@ -24,20 +24,25 @@ public:
 	bool erase_mode;
 	bool drawing_now;
 	bool selecting_now;
+	bool mouse_in_curr_button;
 	sf::Vector2f mouse_pos_picker;
 	sf::Vector2f mouse_pos_map;
 	sf::Vector2f t_coor, t_coor2;
 	sf::Vector2f m_coor, m_coor2;
+	Button* curr_button;
+	sf::Clock clock;
 	string output_file;
+
 	TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* layout, string output_file);
 	void handleInput();
 	void draw();
+
 private:
 	const static int num_buttons = 8;
+	const float delay = 0.5;
 	float menu_height;
-	void onButtonClick(string button);
 	bool shift_down;
-
+	void onButtonClick(string button);
 	void onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
 	void onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view);
