@@ -23,9 +23,10 @@ public:
 	TileGrid(int t, int map_w, int map_h, sf::Texture* texture);
 	void clear(sf::Vector2f coor);
 	void clearRect(sf::Vector2f coor1, sf::Vector2f coor2);
-	void setTextureCoors(sf::Vector2f coor, sf::Vector2f t_coor);
+	void setTextureCoors(sf::Vector2f coors, sf::Vector2f t_coors);
 	void setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
-		sf::Vector2f t_coor1, sf::Vector2f t_coor2);//sf::FloatRect t_rect);
+		sf::Vector2f t_coor1, sf::Vector2f t_coor2);
+	void fill(sf::Vector2f coors, sf::Vector2f t_coors);
 	sf::Vector2f getTextureCoors(sf::Vector2f coor);
 	sf::FloatRect getTextureRect(sf::Vector2f coor1, sf::Vector2f coor2);
 	void setSelectorRect(sf::Vector2f coor1, sf::Vector2f coor2);

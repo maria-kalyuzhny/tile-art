@@ -25,8 +25,8 @@ TileArtGui::TileArtGui(sf::RenderWindow* window, ButtonMenu* menu, ViewLayout* l
 
 void TileArtGui::draw() {
 	window->setView(window_view);
-	window->draw(*menu);
 	window->draw(*layout);
+	window->draw(*menu);
 	window->setView(window_view);
 }
 
@@ -99,6 +99,9 @@ void TileArtGui::onButtonClick(string button) {
 			pencil_mode = true;
 			rectangle_mode = false;
 			fill_mode = false;
+			menu->getButton("pencil")->select();
+			menu->getButton("rectangle")->deselect();
+			menu->getButton("fill")->deselect();
 		}
 	}
 	else if (button == "rectangle") {
@@ -106,13 +109,19 @@ void TileArtGui::onButtonClick(string button) {
 			pencil_mode=false;
 			rectangle_mode = true;
 			fill_mode=false;
+			menu->getButton("pencil")->deselect();
+			menu->getButton("rectangle")->select();
+			menu->getButton("fill")->deselect();
 		}
 	}
 	else if (button == "fill") {
-		if (!rectangle_mode) {
-			rectangle_mode = false;
+		if (!fill_mode) {
 			pencil_mode = false;
+			rectangle_mode = false;
 			fill_mode = true;
+			menu->getButton("pencil")->deselect();
+			menu->getButton("rectangle")->deselect();
+			menu->getButton("fill")->select();
 		}
 	}
 	else if (button == "erase") {
@@ -153,6 +162,7 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 				layout->picker_view->grid->setSelectorRect(mouse_pos_picker, mouse_pos_picker);
 				selecting_now = true;
 				t_coor = mouse_pos_picker;
+				t_coor2 = mouse_pos_picker;
 				layout->picker_view->grid->showSelectorRect();
 				layout->picker_view->grid->hidePosRect();
 			}
@@ -177,7 +187,12 @@ void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2
 						layout->map_view->grid->clear(mouse_pos_map);
 					}
 					else {
-						layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+						if (fill_mode) {
+							layout->map_view->grid->fill(mouse_pos_map, t_coor);
+						}
+						else if (pencil_mode) {
+							layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+						}
 					}
 				}
 			}
@@ -277,7 +292,9 @@ void TileArtGui::onMouseMoved(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_
 								layout->map_view->grid->clear(mouse_pos_map);
 							}
 							else {
-								layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+								if (pencil_mode) {
+									layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+								}
 							}
 						}
 					}
@@ -341,7 +358,9 @@ void TileArtGui::onMouseButtonReleased(sf::Vector2i mouse_pos_window, sf::Vector
 						layout->map_view->grid->clear(mouse_pos_map);
 					}
 					else {
-						layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+						if (pencil_mode) {
+							layout->map_view->grid->setTextureCoors(mouse_pos_map, t_coor);
+						}
 					}
 				}
 				layout->map_view->grid->setPosRect(mouse_pos_map, mouse_pos_map);

@@ -63,6 +63,16 @@ void Button::toggle() {
 	}
 }
 
+void Button::select() {
+	selected = true;
+	setColors(button_select_color, button_select_outline_color);
+}
+
+void Button::deselect() {
+	selected = false;
+	setColors(button_color, button_outline_color);
+}
+
 void Button::hover() {
 	if (!selected) {
 		setColors(button_hover_color, button_hover_outline_color);

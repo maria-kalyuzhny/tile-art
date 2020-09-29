@@ -27,6 +27,8 @@ public:
 	void setColors(sf::Color fill, sf::Color outline);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void toggle();
+	void select();
+	void deselect();
 	void hover();
 	void unhover();
 	void addDescription(TextBox* desc);

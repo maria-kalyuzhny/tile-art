@@ -94,6 +94,24 @@ void TileGrid::setTextureRect(sf::Vector2f coor1, sf::Vector2f coor2,
 	}
 }
 
+void TileGrid::fill(sf::Vector2f coors, sf::Vector2f t_coors) {
+	if (coors.x < 0 || coors.x >= w || coors.y < 0 || coors.y >= h) {
+		return;
+	}
+	int v = getVertexFromCoors(coors);
+	t_coors = getTileCoors(sf::Vector2f(0,0));
+	if (vertices[v].color == sf::Color::Transparent) {
+		for (int i = v; i < v + 4; i++) {
+			vertices[i].color = sf::Color::White;
+		}
+	}
+	vertices[v].texCoords = t_coors;
+	vertices[v + 1].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y);
+	vertices[v + 2].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y + t);
+	vertices[v + 3].texCoords = sf::Vector2f(t_coors.x, t_coors.y + t);
+
+}
+
 sf::Vector2f TileGrid::getTextureCoors(sf::Vector2f coors) {
 	int v = getVertexFromCoors(coors);
 	return vertices[v].texCoords;
