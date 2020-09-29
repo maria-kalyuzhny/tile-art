@@ -25,23 +25,36 @@ Run the command
 
 ### Keyboard Shortcuts
 Zoom in and out using mouse wheel
+
 Scroll using W,A,S,D
 
 ### Tools
 Save - saves updated image to the file indicated by the -o flag earlier.
+
 Pencil - draw using a single free form line
+
 Stamp - select a rectangular region from the tile palette, and draw a rectangle on the tile map to fill it with the selected region.
+
 Fill - regular paintbucket fill
+
 Erase - Toggle-able button to allow erasing with each of the three above tools (Pencil, Stamp, and Fill)
+
 Fit Screen - fits both the tile palette and the tile map to screen.
 
 ### Default Tilesets
 The following default tilesets are included in the /img folder to play around with.
 (coming soon)
 
-###Future Scope
+### Future Scope
 -Integrate Windows API to allow saving and loading without using the terminal
+<<<<<<< HEAD
 -Add undo
 -Add layers tool
 -Add drag tool
 -Allow save as 2D array for easy integration with game code
+=======
+
+-Add layers tool
+
+-Allow save as 2D array for easy integration with game code
+>>>>>>> 7d17fbf247e9cabac77252562be99584b867bb91
