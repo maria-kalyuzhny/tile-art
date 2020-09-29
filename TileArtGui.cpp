@@ -77,7 +77,7 @@ void TileArtGui::handleInput() {
 		}
 		if (clock.getElapsedTime().asSeconds() >= delay &&
 			mouse_in_curr_button && curr_button) {
-			cout << "showing description" << endl;
+			//cout << "showing description" << endl;
 			curr_button->description->show();
 			window->clear(layout->bg_color);
 			draw();

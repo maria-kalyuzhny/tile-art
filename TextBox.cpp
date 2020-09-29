@@ -46,8 +46,6 @@ void TextBox::setPosition(float x, float y) {
 }
 
 void TextBox::show() {
-	cout << "showing textbox" << endl;
-	cout << "textbox size" << box.getSize().x << box.getSize().y << endl;
 	if (!visible) {
 		box.setFillColor(textbox_fill_color);
 		box.setOutlineColor(textbox_outline_color);

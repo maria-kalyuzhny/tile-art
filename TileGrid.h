@@ -46,6 +46,7 @@ private:
 	int getVertexFromRowCol(int row, int col);
 	int getRowFromVertex(int v);
 	int getColFromVertex(int v);
+	void floodFill(int row, int col, sf::Vector2f t_coors, sf::Vector2f o_coors, vector<vector<int>>& is_checked);
 	sf::Vector2f getTileCoors(sf::Vector2f coor);
 	sf::FloatRect getTileRect(sf::Vector2f coor1, sf::Vector2f coor2);
 };

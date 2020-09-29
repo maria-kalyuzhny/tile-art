@@ -71,9 +71,9 @@ void TileGridView::zoom(int delta) {
 }
 
 void TileGridView::handleZoom() {
-	cout << "zoom " << z << endl;
-	cout << "view width " << w << endl;
-	cout << "grid width " << grid->w / z << endl;
+	//cout << "zoom " << z << endl;
+	//cout << "view width " << w << endl;
+	//cout << "grid width " << grid->w / z << endl;
 	if (w - grid->w / z > 0) {
 		view.setCenter(grid->w / 2, view.getCenter().y);
 		s.x = 0;
@@ -83,9 +83,9 @@ void TileGridView::handleZoom() {
 		view.move(s.x,0);
 		//view.setCenter(grid->w/2,view.getCenter().y);
 		//cout << "moving view x " << -w / 2 + (w * z) / 2 << endl;
-		cout << "x center at " << view.getCenter().x << endl;
-		cout << "x left limit at " << floor((w * z) / 2) << endl;
-		cout << "x right limit at " << grid->w - floor((w * z) / 2) << endl;
+		//cout << "x center at " << view.getCenter().x << endl;
+		//cout << "x left limit at " << floor((w * z) / 2) << endl;
+		//cout << "x right limit at " << grid->w - floor((w * z) / 2) << endl;
 		if (view.getCenter().x >= grid->w - floor((w * z) / 2)) {
 			while (view.getCenter().x >= grid->w - floor((w * z) / 2)) {
 				view.move(sf::Vector2f(-1, 0));
