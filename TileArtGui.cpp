@@ -133,7 +133,10 @@ void TileArtGui::onButtonClick(string button) {
 			erase_mode = true;
 		}
 	}
-
+	else if (button == "fit"){
+		layout->picker_view->fitToScreen();
+		layout->map_view->fitToScreen();
+	}
 }
 
 void TileArtGui::onMouseButtonPressed(sf::Vector2i mouse_pos_window, sf::Vector2f mouse_pos_view) {
