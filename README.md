@@ -6,55 +6,77 @@ TileArt was built from scratch in C++ using minimal external libraries (SFML and
 
 ## Demo
 
-Efficient tile editing tools include draw, fill, and stamp, as well as 'eraser' versions of these tools.
-(gif coming soon)
+Editing tools include draw, fill, erase, and rectangle, allowing quick and intuitive tilemap creation. 
 
+![Alt Text](https://github.com/maria-kalyuzhny/tile-art/blob/master/media/gif1.gif)
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+User interface navigation allows zoom, scroll, and resize using mouse wheel and keyboard shortcuts.
+(built using only SFML)
+
+![Alt Text](https://github.com/maria-kalyuzhny/tile-art/blob/master/media/gif2.gif)
 
 ## Usage
 
-(coming soon)
-TileArt is currently only available for Windows devices. To install it, simply download and unzip the folder TileArt.zip.
+To install TileArt, simply download and unzip the folder TileArt.zip. (coming soon)
 
 ### Running TileArt
-From a terminal, navigate to the folder containing TileArt.exe. Ensure that the /img folder is in the same location as the .exe file. 
+From a terminal, navigate to the folder containing TileArt.exe. Ensure that the /img  folder is in the same location as the .exe file. 
 
 Run the command
 ```bash
 ./TileArt.exe -t <tile_size> -x <width> -y <height> -s <tileset_image> -o <output_image>
 ```
+Option descriptions:
+```
+-h, --help
+  Print the help message
+-t, --tilesize
+  Width and height of tiles in pixels
+-x, --width
+  Width of tile grid (in number of tiles)
+-y, --height
+  Height of tile grid (in number of tiles)
+-s, --tileset
+  Path to .png, jpg, or .gif image file to use as tileset.
+  Please use an image with a whole number of tiles, i.e. the image
+  width and height should be evenly divisible by the tile size.
+-o, --output
+  REQUIRED. Path to the output image file. Must be an image file in
+  .png, .jpg, or .gif format. Your work will write to this file each
+  time the save button is pressed.
+```
 
-### Keyboard Shortcuts
-Zoom in and out using mouse wheel
+### User interface navigation
+Zoom in: Mouse wheel up
 
-Scroll using W,A,S,D
+Zoom out: Mouse wheel down
+
+Scroll: W,A,S,D
 
 ### Tools
 Save - saves updated image to the file indicated by the -o flag earlier.
 
-Pencil - draw using a single free form line
-
-Stamp - select a rectangular region from the tile palette, and draw a rectangle on the tile map to fill it with the selected region.
-
-Fill - regular paintbucket fill
-
-Erase - Toggle-able button to allow erasing with each of the three above tools (Pencil, Stamp, and Fill)
-
 Fit Screen - fits both the tile palette and the tile map to screen.
 
-### Default Tilesets
-The following default tilesets are included in the /img folder to play around with.
-(coming soon)
+Pencil - draw using a single free form line
 
-### Future Scope
+Rectangle - select a rectangular region from the tile palette, and draw a rectangle on the tile map to fill it with the selected region.
+
+Fill - fill an area of uniform tiles with a different tile (regular paintbucket fill)
+
+Erase - toggle eraser (use Pencil and Rectangle buttons for different eraser modes)
+
+### Default Tilesets
+The following default tilesets are included in the /img folder to play around with:
+/img/motherload_tiles.png (tilesize: 64)
+/img/cavesofgallet_tiles.png (tilesize: 8)
+
+## Future Scope
 -Integrate Windows API to allow saving and loading without using the terminal
-<<<<<<< HEAD
 -Add undo
 -Add layers tool
 -Add drag tool
 -Allow save as 2D array for easy integration with game code
-=======
-
--Add layers tool
-
--Allow save as 2D array for easy integration with game code
->>>>>>> 7d17fbf247e9cabac77252562be99584b867bb91
