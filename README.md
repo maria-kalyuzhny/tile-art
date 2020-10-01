@@ -14,8 +14,6 @@ Editing tools include draw, fill, erase, and rectangle, allowing quick and intui
 <br/><br/>
 User interface navigation allows zoom, scroll, and resize using mouse wheel and keyboard shortcuts.
 
-(built using only SFML)
-
 ![Alt Text](https://github.com/maria-kalyuzhny/tile-art/blob/master/media/gif2.gif)
 
 ## Usage
@@ -23,7 +21,7 @@ User interface navigation allows zoom, scroll, and resize using mouse wheel and 
 To install TileArt, simply download and unzip the folder TileArt.zip. (coming soon)
 
 ### Running TileArt
-From a terminal, navigate to the folder containing TileArt.exe. Ensure that the /img  folder is in the same location as the .exe file. 
+Navigate to the folder containing TileArt.exe from a terminal.
 
 Run the command
 ```bash
@@ -50,11 +48,11 @@ Option descriptions:
 ```
 
 ### User interface navigation
-Zoom in: Mouse wheel up
+Zoom in:	Mouse wheel up
 
-Zoom out: Mouse wheel down
+Zoom out:	Mouse wheel down
 
-Scroll: W,A,S,D
+Scroll:		W,A,S,D
 
 ### Tools
 Save - saves updated image to the file indicated by the -o flag earlier.
@@ -70,7 +68,7 @@ Fill - fill an area of uniform tiles with a different tile (regular paintbucket 
 Erase - toggle eraser (use Pencil and Rectangle buttons for different eraser modes)
 
 ### Default Tilesets
-The following default tilesets are included in the /img folder to play around with:
+The following default tilesets are included in the /img folder:
 
 /img/motherload_tiles.png (tilesize: 64)
 
