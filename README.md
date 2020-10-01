@@ -12,7 +12,6 @@ Editing tools include draw, fill, erase, and rectangle, allowing quick and intui
 <br/><br/>
 <br/><br/>
 <br/><br/>
-<br/><br/>
 User interface navigation allows zoom, scroll, and resize using mouse wheel and keyboard shortcuts.
 (built using only SFML)
 
@@ -71,12 +70,18 @@ Erase - toggle eraser (use Pencil and Rectangle buttons for different eraser mod
 
 ### Default Tilesets
 The following default tilesets are included in the /img folder to play around with:
+
 /img/motherload_tiles.png (tilesize: 64)
+
 /img/cavesofgallet_tiles.png (tilesize: 8)
 
 ## Future Scope
--Integrate Windows API to allow saving and loading without using the terminal
--Add undo
--Add layers tool
--Add drag tool
--Allow save as 2D array for easy integration with game code
+Integrate Windows API to allow saving and loading without using the terminal
+
+Add undo
+
+Add layers tool
+
+Add drag tool
+
+Allow save as 2D array for easy integration with game code
