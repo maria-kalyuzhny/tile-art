@@ -105,66 +105,9 @@ void TileGrid::fill(sf::Vector2f coors, sf::Vector2f t_coors) {
 	int col = getColFromVertex(v);
 	sf::Vector2f o_coors = getTextureCoors(coors); //original texture
 	sf::Vector2f texture_coors = getTileCoors(t_coors);
-	cout << "tex coords are " << texture_coors.x << ", " << texture_coors.y << endl;
-	cout << "o coords are " << o_coors.x << ", " << o_coors.y << endl;
-	//std::vector<std::vector<int>> is_checked;
 	vector<vector<int>> checked(h_tiles, vector<int>(w_tiles, false));
 
 	floodFill(row, col, texture_coors, o_coors, checked);
-}
-
-void TileGrid::floodFill(int row, int col, sf::Vector2f t_coors, 
-	sf::Vector2f o_coors, vector<vector<int>>& checked){
-	cout << "at row " << row << " col " << col << endl;
-	// if out of bounds return
-	if (row < 0 || row >= h_tiles || col < 0 || col >= w_tiles) {
-		cout << "out of range" << endl;
-		return;
-	}
-
-	// if not original color return
-	int v = getVertexFromRowCol(row,col);
-	if (vertices[v].texCoords != o_coors) {
-		cout << "doesn't match original color" << endl;
-		return;
-	}
-
-	//color the tile
-	cout << "x coor changed from " << vertices[v].texCoords.x;
-	if (vertices[v].color == sf::Color::Transparent) {
-		for (int k = v; k < v + 4; k++) {
-			vertices[k].color = sf::Color::White;
-		}
-	}
-	vertices[v].texCoords = t_coors;
-	vertices[v + 1].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y);
-	vertices[v + 2].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y + t);
-	vertices[v + 3].texCoords = sf::Vector2f(t_coors.x, t_coors.y + t);
-	cout << " to " << vertices[v].texCoords.x << endl;
-	//mark tile as checked
-	checked[row][col]=true;
-
-	if (row + 1 < h_tiles) {
-		if (!checked[row + 1][col]) {
-			floodFill(row + 1, col, t_coors, o_coors, checked);
-		}
-	}
-	if (col + 1 < w_tiles) {
-		if (!checked[row][col + 1]) {
-			floodFill(row, col + 1, t_coors, o_coors, checked);
-		}
-	}
-	if (row - 1 >= 0) {
-		if (!checked[row - 1][col]) {
-			floodFill(row - 1, col, t_coors, o_coors, checked);
-		}
-	}
-	if (col - 1 >= 0) {
-		if (!checked[row][col - 1]) {
-			floodFill(row, col - 1, t_coors, o_coors, checked);
-		}
-	}
-	return;
 }
 
 sf::Vector2f TileGrid::getTextureCoors(sf::Vector2f coors) {
@@ -252,10 +195,6 @@ int TileGrid::getOutlineWidth() {
 }
 
 int TileGrid::getVertexFromCoors(sf::Vector2f coors) {
-	//if (coors.x < 0 || coors.y < 0 || coors.x >= t * w_tiles|| coors.y >= t * h_tiles) {
-	//	cout << "vertex coors out of range. Returning vertex 0" << endl;
-	//	return 0;
-	//}
 	int x = coors.x / t;
 	int y = coors.y / t;
 	return 4*(y * w_tiles + x);
@@ -313,4 +252,53 @@ sf::FloatRect TileGrid::getTileRect(sf::Vector2f coor1, sf::Vector2f coor2) {
 	sf::Vector2f pos = upper_left;
 	sf::Vector2f size = lower_right - upper_left + sf::Vector2f(t, t);
 	return sf::FloatRect(pos, size);
+}
+
+void TileGrid::floodFill(int row, int col, sf::Vector2f t_coors,
+	sf::Vector2f o_coors, vector<vector<int>>& checked) {
+	// if out of bounds return
+	if (row < 0 || row >= h_tiles || col < 0 || col >= w_tiles) {
+		return;
+	}
+
+	// if not original color return
+	int v = getVertexFromRowCol(row, col);
+	if (vertices[v].texCoords != o_coors) {
+		return;
+	}
+
+	//color the tile
+	if (vertices[v].color == sf::Color::Transparent) {
+		for (int k = v; k < v + 4; k++) {
+			vertices[k].color = sf::Color::White;
+		}
+	}
+	vertices[v].texCoords = t_coors;
+	vertices[v + 1].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y);
+	vertices[v + 2].texCoords = sf::Vector2f(t_coors.x + t, t_coors.y + t);
+	vertices[v + 3].texCoords = sf::Vector2f(t_coors.x, t_coors.y + t);
+	//mark tile as checked
+	checked[row][col] = true;
+
+	if (row + 1 < h_tiles) {
+		if (!checked[row + 1][col]) {
+			floodFill(row + 1, col, t_coors, o_coors, checked);
+		}
+	}
+	if (col + 1 < w_tiles) {
+		if (!checked[row][col + 1]) {
+			floodFill(row, col + 1, t_coors, o_coors, checked);
+		}
+	}
+	if (row - 1 >= 0) {
+		if (!checked[row - 1][col]) {
+			floodFill(row - 1, col, t_coors, o_coors, checked);
+		}
+	}
+	if (col - 1 >= 0) {
+		if (!checked[row][col - 1]) {
+			floodFill(row, col - 1, t_coors, o_coors, checked);
+		}
+	}
+	return;
 }

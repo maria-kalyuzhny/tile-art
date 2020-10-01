@@ -18,7 +18,6 @@ const sf::Color GuiElement::pos_outline_color = sf::Color(255, 255, 255, 100);
 const sf::Color GuiElement::pos_fill_color = sf::Color(0, 0, 0, 50);
 const sf::Color GuiElement::view_outline_color = sf::Color(100,100,100,255);
 const sf::Color GuiElement::textbox_fill_color = sf::Color(255,239,181);
-//const sf::Color GuiElement::textbox_fill_color = sf::Color(153, 120, 0);
 const sf::Color GuiElement::textbox_outline_color = sf::Color(255,200,0);
 const sf::Color GuiElement::text_color = sf::Color::Black;
 const string GuiElement::font_file = "./img/DejaVuSansMono.ttf";
@@ -37,7 +36,6 @@ GuiElement::GuiElement() {
 }
 
 GuiElement::GuiElement(float x, float y, float w, float h) {
-	//cout << "Running GuiElement constructor" << endl;
 	this->x = x;
 	this->y = y;
 	this->w = w;
@@ -52,8 +50,6 @@ void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 bool GuiElement::containsMouse(sf::Vector2f mouse) {
-	//cout << "mouse coors: " << coor_x << ", " << coor_y << endl;
-	//cout << "elem dims:" << this->x << " " << this->y << " " << this->w << " " << this->h << endl;
 	if (mouse.x >= this->x && mouse.x <= this->x + this->w \
 		&& mouse.y >= this->y && mouse.y <= this->y + this->h) {
 		return true;
@@ -62,7 +58,6 @@ bool GuiElement::containsMouse(sf::Vector2f mouse) {
 }
 
 bool GuiElement::initFont() {
-	cout << "loading font" << endl;
 	if (!font.loadFromFile(font_file)) {
 		std::cerr << "Unable to load font " << font_file << endl;
 		return false;

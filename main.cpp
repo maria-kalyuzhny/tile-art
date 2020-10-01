@@ -17,7 +17,7 @@
 #include "TileGrid.h"
 #include "TileGridView.h"
 namespace po = boost::program_options;
-using namespace std;
+//using namespace std;
 
 /*const global variables */
 const float init_width = 0.8*sf::VideoMode::getDesktopMode().width;
@@ -45,8 +45,6 @@ sf::Image texture_img;
 sf::Texture texture;
 sf::Vector2u texture_size;
 sf::Texture button_textures[num_buttons];
-
-/*function declarations*/
 
 sf::Texture loadTexture(string file) {
 	sf::Texture texture;
@@ -87,7 +85,7 @@ int parse_args(int argc, char** argv) {
 	}
 	po::notify(vm);
 	if (vm.count("help")) {
-		cout << desc << "\n";
+		std::cout << desc << "\n";
 		return 1;
 	}
 	tile_size = vm["tilesize"].as<int>();

@@ -76,12 +76,9 @@ void Button::deselect() {
 void Button::hover() {
 	if (!selected) {
 		setColors(button_hover_color, button_hover_outline_color);
-		//cout << "hovering over unselected button " << name << endl;
 	}
 	else {
-		//cout << "hovering over selected button " << name << endl;
 	}
-	//description->show();
 }
 
 void Button::unhover() {
@@ -91,7 +88,6 @@ void Button::unhover() {
 	else {
 		setColors(button_select_color, button_select_outline_color);
 	}
-	//description->hide();
 }
 
 void Button::addDescription(TextBox* desc) {

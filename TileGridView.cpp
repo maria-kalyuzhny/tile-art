@@ -30,7 +30,6 @@ void TileGridView::reset(const sf::FloatRect& rect) {
 		z = full_zoom;
 	}
 	view.setSize(w * z, h * z);
-	//handleResize();
 	handleZoom();
 }
 
@@ -42,8 +41,6 @@ void TileGridView::resize(float w, float h) {
 void TileGridView::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.setView(view);
 	target.draw(*grid);
-	//sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(500,250));
-	//target.draw(rect);
 }
 
 void TileGridView::zoom(int delta) {
@@ -82,14 +79,12 @@ void TileGridView::handleZoom() {
 		if (view.getCenter().x >= grid->w - floor((w * z) / 2)) {
 			while (view.getCenter().x >= grid->w - floor((w * z) / 2)) {
 				view.move(sf::Vector2f(-1, 0));
-				cout << "moving right" << endl;
 			}
 			s.x = view.getCenter().x - grid->w / 2;
 		}
 		else if (view.getCenter().x <= floor((w * z) / 2)){
 			while (view.getCenter().x <= floor((w * z) / 2)) {
 				view.move(sf::Vector2f(1, 0));
-				cout << "moving left" << endl;
 			}
 			s.x = view.getCenter().x - grid->w / 2;
 		}
@@ -182,7 +177,6 @@ void TileGridView::scroll(sf::Keyboard::Key key){
 			}
 		}
 	}
-	cout << "center set to" << view.getCenter().x << ", " << view.getCenter().y << endl;
 }
 
 void TileGridView::centerOnGrid() {
