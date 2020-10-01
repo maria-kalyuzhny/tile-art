@@ -195,10 +195,6 @@ void TileGridView::centerOnGrid() {
 }
 
 void TileGridView::fitToScreen() {
-	/*float x_ratio = grid->w/w;
-	float y_ratio = grid->h/h;
-	z = std::max(x_ratio, y_ratio);
-	view.setSize(w*z,h*z);*/
 	z = std::max(grid->w / w, grid->h / h);
 	view.setSize(w*z,h*z);
 	s = sf::Vector2f(0, 0);

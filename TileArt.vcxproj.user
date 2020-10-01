@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>-t 8 -x 50 -y 40 -s ./img/cavesofgallet_tiles.png -o C:/Users/Maria/Pictures/cavesofgallet_tiles.png</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-t 64 -x 35 -y 25 -s ./img/motherload_tiles.png -o C:/Users/Maria/Pictures/motherload.png</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerCommandArguments>-t 8 -x 50 -y 40 -s ./img/cavesofgallet_tiles.png -o C:/Users/Maria/Pictures/cavesofgallet_tiles.png</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-t 64 -x 35 -y 25 -s ./img/motherload_tiles.png -o C:/Users/Maria/Pictures/motherload.png</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
