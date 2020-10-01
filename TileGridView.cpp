@@ -111,25 +111,7 @@ void TileGridView::handleZoom() {
 	}
 }
 
-void TileGridView::handleResize() {
-	if (w - grid->w / z > 0) {
-		view.setCenter(grid->w / 2, view.getCenter().y);
-		s.x=0;
-	}
-	else {
-		view.setCenter(w/2, view.getCenter().y);
-		view.move(s.x,0);
-	}
-	if (h - grid->h / z > 0) {
-		view.setCenter(view.getCenter().x, grid->h / 2);
-		s.y=0;
-	}
-	else {
-		view.setCenter(view.getCenter().x, h / 2);
-		view.move(0,s.y);
-	}
-}
-
+//move view left, right, left, up, or down, depending on pressed key
 void TileGridView::scroll(sf::Keyboard::Key key){
 	float new_x=0;
 	float new_y=0;

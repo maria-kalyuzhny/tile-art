@@ -17,7 +17,6 @@
 #include "TileGrid.h"
 #include "TileGridView.h"
 namespace po = boost::program_options;
-//using namespace std;
 
 /*const global variables */
 const float init_width = 0.8*sf::VideoMode::getDesktopMode().width;

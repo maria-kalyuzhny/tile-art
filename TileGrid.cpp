@@ -280,6 +280,7 @@ void TileGrid::floodFill(int row, int col, sf::Vector2f t_coors,
 	//mark tile as checked
 	checked[row][col] = true;
 
+	//if tiles to the S,E,N,W, are unchecked, run floodFill on them
 	if (row + 1 < h_tiles) {
 		if (!checked[row + 1][col]) {
 			floodFill(row + 1, col, t_coors, o_coors, checked);
