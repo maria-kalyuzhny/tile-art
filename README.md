@@ -13,6 +13,7 @@ Editing tools include draw, fill, erase, and rectangle, allowing quick and intui
 <br/><br/>
 <br/><br/>
 User interface navigation allows zoom, scroll, and resize using mouse wheel and keyboard shortcuts.
+
 (built using only SFML)
 
 ![Alt Text](https://github.com/maria-kalyuzhny/tile-art/blob/master/media/gif2.gif)
