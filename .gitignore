@@ -1,1 +1,8 @@
 *.TMP
+Debug
+Debug/*
+*.filters
+*.user
+*.vcxproj*
+x64
+x64/*
