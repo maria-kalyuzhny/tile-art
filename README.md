@@ -1,6 +1,6 @@
 # TileArt
 
-TileArt is a raster graphics editor for creating tile-based images using a tile set provided by the user. It's perfect for quickly designing tile-based 2D video game levels without the complexity and learning curve required by software like Unity and Unreal Engine, as well as creating pixel art and geometric patterns.
+TileArt is a Windows-based raster graphics editor for creating tile-based images using a tile set provided by the user. It's perfect for quickly designing tile-based 2D video game levels without the complexity and learning curve required by software like Unity and Unreal Engine, as well as creating pixel art and geometric patterns.
 
 TileArt was built from scratch in C++ using minimal external libraries (SFML and Boost), and designed for an efficient, intuitive, and aesthetically pleasing workflow. 
 
@@ -17,14 +17,13 @@ User interface navigation allows zoom, scroll, and resize using mouse wheel and 
 ![Alt Text](https://github.com/maria-kalyuzhny/tile-art/blob/master/media/gif2.gif)
 
 ## Usage
-
-To install TileArt, simply download and unzip the folder TileArt.zip. (coming soon)
+To download TileArt, simply download and unzip the TileArt.zip folder above.
 
 ### Running TileArt
-Navigate to the folder containing TileArt.exe from a terminal.
+Navigate to the unzipped folder containing TileArt.exe from a terminal. This folder includes the executable and an /img folder, which contains required image and font assets.
 
 Run the command
-```bash
+```
 ./TileArt.exe -t <tile_size> -x <width> -y <height> -s <tileset_image> -o <output_image>
 ```
 Option descriptions:
