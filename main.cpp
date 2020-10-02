@@ -32,7 +32,7 @@ const static string button_icons[num_buttons] = \
   "./img/rectangle.png", "./img/fill.png", "./img/erase.png" };
 const static string button_descriptions[num_buttons] = \
 { "Save", "Fit screen", "Pencil", "Rectangle", "Fill", "Toggle eraser" };
-const static string default_tileset="./img/transparent.png";	
+const static string default_tileset="./img/motherload_tiles.png";	
 
 /*global variables*/
 int tile_size;
@@ -59,7 +59,7 @@ int parse_args(int argc, char** argv) {
 	po::options_description desc("Usage");
 	desc.add_options()
 		("help,h", "Print help message")
-		("tilesize,t", po::value<int>()->default_value(128), "Width and height of tiles in pixels")
+		("tilesize,t", po::value<int>()->default_value(64), "Width and height of tiles in pixels")
 		("width,x", po::value<int>()->default_value(15), "Width of tile grid in number of tiles")
 		("height,y", po::value<int>()->default_value(12), "Height of tile grid in number of tiles")
 		("tileset,s", po::value<string>()->default_value(default_tileset), "Path to .png, "
@@ -93,7 +93,7 @@ int parse_args(int argc, char** argv) {
 	string tileset_file = vm["tileset"].as<string>();
 	output_file = vm["output"].as<string>();
 
-	/* notify user what default values are used */
+	/* notify user what default and non-default values are used */
 	if (vm["tilesize"].defaulted()) {
 		std::cout << "Tile size set to default value " << tile_size << "." << endl;
 	}
