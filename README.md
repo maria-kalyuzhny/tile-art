@@ -1,8 +1,10 @@
 # TileArt
 
-TileArt is a Windows-based raster graphics editor for creating tile-based images using a tile set provided by the user. It's perfect for quickly designing tile-based 2D video game levels without the complexity and learning curve required by software like Unity and Unreal Engine. It can also be used to create pixel art and geometric patterns.
+Personal project
 
-TileArt was built from scratch in C++ using minimal external libraries (SFML and Boost), and designed for an efficient, intuitive, and aesthetically pleasing workflow. 
+TileArt is a Windows-based raster graphics editor for creating tile-based images using a tile set provided by the user. It can be used for quickly designing tile-based 2D video game levels without the learning curve required by software like Unity and Unreal Engine. It can also be used to create pixel art and geometric patterns.
+
+Built in C++ using SFML and Boost. 
 
 ## Demo
 
